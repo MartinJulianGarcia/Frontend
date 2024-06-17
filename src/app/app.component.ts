@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule, NgFor, NgIf } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
@@ -11,7 +12,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [ NgFor,NgIf, RouterOutlet, HeaderComponent, FooterComponent, MainComponent, ArticuloComponent, SidebarComponent],
+  imports: [ NgFor,NgIf, RouterOutlet, HeaderComponent, FooterComponent, MainComponent, ArticuloComponent, SidebarComponent,RouterModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
