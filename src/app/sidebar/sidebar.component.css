@@ -1,21 +1,12 @@
 #sidebar-wrapper {
-    width: 120px;
+    width: 100%;
    
     top: 0;
-    left: 0;
+    left: 2;
     height: 100%;
     z-index: 1000;
     overflow-y: auto;
     background-color: #f8f9fa;
   }
-
-  #mio{
-    height: 600px;
-  }
-
-  #padmain{
-    left: 30px;
-    top: 10px;
-  }
-
+  
   

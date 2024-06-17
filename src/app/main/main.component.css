@@ -1,0 +1,5 @@
+#page-content-wrapper {
+    margin-left: 150px;
+    width: calc(100% - 150px);
+  }
+
