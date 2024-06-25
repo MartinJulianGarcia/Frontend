@@ -7,12 +7,16 @@ import { FooterComponent } from './footer/footer.component';
 import { MainComponent } from './main/main.component';
 import { ArticuloComponent } from './main/articulo/articulo.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { CarritoComponent } from './carrito/carrito.component';
+import { MiscomprasComponent } from './miscompras/miscompras.component';
+import { ArticuloService } from '../Servicios/articulos.service';
 
+import { routes } from './app.routes';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [ NgFor,NgIf, RouterOutlet, HeaderComponent, FooterComponent, MainComponent, ArticuloComponent, SidebarComponent,RouterModule],
+  imports: [ NgFor,NgIf, RouterOutlet, HeaderComponent, FooterComponent, MainComponent, ArticuloComponent, SidebarComponent,CarritoComponent,MiscomprasComponent,RouterModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

@@ -7,6 +7,8 @@ import { Articulo } from '../Modelo/Articulo';
 export class ArticuloService {
 
   Articulos : Array<Articulo>
+  carrito :   Array<Articulo>
+  //private static instanceCount = 0;
 
   constructor() {
     const art1 = new Articulo("Remera1", "Remera", 500, 1, 20, "Verano")
@@ -14,14 +16,27 @@ export class ArticuloService {
     const art3 = new Articulo("Remera3", "Remera",1200, 3 , 0, "Verano")
 
     this.Articulos = [art1, art2, art3]
+    this.carrito=[];
+
+    //alert(`CarritoService instance count: ${ArticuloService.instanceCount}`);
    }
 
   getArticulos(): Array<Articulo> {
     return this.Articulos;
   }
 
- // getLibroByISBN(isbn: string){
-  //  return this.libros.find(libro => libro.getIsbn() === isbn)
- // }
+  AgregarCarrito(ar: Articulo) {
+    this.carrito.push(ar);
+   // localStorage.setItem('carrito', JSON.stringify(this.carrito));
+  }
+
+  getcarrito(): Array<Articulo> {
+
+   // const storedCart = localStorage.getItem('carrito');
+    //if (storedCart) {
+     // this.carrito = JSON.parse(storedCart);
+    //}
+    return this.carrito;
+  }
 
 }
