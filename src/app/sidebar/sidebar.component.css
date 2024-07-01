@@ -8,5 +8,9 @@
     overflow-y: auto;
     background-color: #f8f9fa;
   }
+
+  .custom-cursor:hover {
+    cursor: pointer;
+  }
   
   

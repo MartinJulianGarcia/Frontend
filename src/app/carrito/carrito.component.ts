@@ -37,6 +37,13 @@ export class CarritoComponent implements OnInit {
 
     alert(this.ArtService.getcarrito());
   }
+  
+  vaciar() : void {
+        
+    this.ArtService.SacarCarrito();
+
+    alert("El carrito se vacio");
+  }
 
   ngOnInit(): void {
     this.Articuloscarrito = this.ArtService.getcarrito()

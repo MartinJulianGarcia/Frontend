@@ -17,4 +17,10 @@ import { SidebarComponent } from '../sidebar/sidebar.component';
 })
 export class HomeComponent {
 
+
+  prueba()
+  {
+    alert("el evento funciona");
+  }
+
 }

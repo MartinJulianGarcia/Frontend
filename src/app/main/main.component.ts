@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ArticuloComponent } from './articulo/articulo.component';
 import { Articulo } from '../../Modelo/Articulo';
 import { ArticuloService } from '../../Servicios/articulos.service';
@@ -33,8 +33,16 @@ export class MainComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.Articulos = this.ArtService.getArticulos()
+    this.Articulos = this.ArtService.getArticulosfiltrados()
     
+  }
+
+  actualizar(): void {
+
+   
+   this.Articulos = this.ArtService.getArticulosfiltrados();
+   alert('el evento si funciona pero no se actualiza la vista')
+
   }
 
 }

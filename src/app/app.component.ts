@@ -10,13 +10,15 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { CarritoComponent } from './carrito/carrito.component';
 import { MiscomprasComponent } from './miscompras/miscompras.component';
 import { ArticuloService } from '../Servicios/articulos.service';
+import {  FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormularioComponent } from './formulario/formulario.component';
 
 import { routes } from './app.routes';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [ NgFor,NgIf, RouterOutlet, HeaderComponent, FooterComponent, MainComponent, ArticuloComponent, SidebarComponent,CarritoComponent,MiscomprasComponent,RouterModule],
+  imports: [ NgFor,NgIf, RouterOutlet, HeaderComponent, FooterComponent, MainComponent, ArticuloComponent, SidebarComponent,CarritoComponent,MiscomprasComponent,RouterModule, FormularioComponent, ReactiveFormsModule, FormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

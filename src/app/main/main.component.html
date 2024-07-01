@@ -1,8 +1,8 @@
 <div id="page-content-wrapper"   id="padmain">
 
-<h4 >Articulos:</h4>
+<h4 (filtrochange)="actualizar()">Articulos:</h4>
 <br>
-<ng-container *ngFor="let Articulo of Articulos">
+<ng-container *ngFor="let Articulo of Articulos" (filtrochange)="actualizar()">
 <ng-container *ngIf="Articulo.getStock()>0">
    <app-articulo [Articulo]="Articulo"  ></app-articulo>
 </ng-container>
