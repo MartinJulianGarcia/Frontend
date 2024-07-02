@@ -4,13 +4,13 @@ import { Usuario } from "./Usuario";
 
 export class Compra {
     private id: number;
-    private fecha: Date;
+    private fecha: number;
     private importe: number;
     private mediodepago: string;
     private Arts: Array<Articulo>;
-    private usuario:Usuario;
+    private idusuario:number;
 
-    constructor(mediodepago: string, id: number, importe: number, arts: Array<Articulo>, user:Usuario, fecha: Date) {
+    constructor(mediodepago: string, id: number, importe: number, arts: Array<Articulo>, iduser:number, fecha: number) {
 
 
         this.fecha=fecha;
@@ -18,7 +18,7 @@ export class Compra {
         this.mediodepago =mediodepago;
         this.id=id;
         this.Arts=arts;
-        this.usuario=user;
+        this.idusuario=iduser;
 
 
         //compras= new ArrayList<>();
@@ -61,20 +61,20 @@ export class Compra {
         this.Arts = arts;
     }
 
-    getUsuario(): Usuario {
-        return this.usuario;
+    getUsuario(): number {
+        return this.idusuario;
     }
 
-    setUsuario(user: Usuario): void {
-        this.usuario = user;
+    setUsuario(user: number): void {
+        this.idusuario = user;
     }
 
     
-    getfecha(): Date {
+    getfecha(): number {
         return this.fecha;
     }
 
-    setfecha(fecha: Date): void {
+    setfecha(fecha: number): void {
         this.fecha = fecha;
     }
 

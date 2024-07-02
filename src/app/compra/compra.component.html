@@ -1,0 +1,14 @@
+<div class="row" id="padingart">
+    <div class="col-7 bg-light border" id="art">
+         <li>Nro de compra: {{Compra?.getId()}}</li>
+     </div>
+     <div class="col-4 bg-light border">
+         <li> Importe: ${{Compra?.getImporte()}}</li>
+         <li>Medio de pago: {{Compra?.getmediodepago()}}</li>
+         <li>Articulos: </li>
+         <ng-container *ngfor="let Articulos in Articulosdelacompra" > </ng-container>
+         <!--*ngfor="let Articulos in Articulosdelacompra"-->
+     </div>
+  
+   
+ </div>

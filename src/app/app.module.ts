@@ -8,6 +8,7 @@ import { BrowserModule } from '@angular/platform-browser';
 //import { ArticuloComponent } from './main/articulo/articulo.component';
 //import { SidebarComponent } from './sidebar/sidebar.component';
 import { CommonModule } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 
 @NgModule({
   declarations: [

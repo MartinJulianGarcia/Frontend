@@ -6,6 +6,8 @@
     <ng-container *ngFor="let Articulo of Articuloscarrito">
         <app-articulo [Articulo]="Articulo"></app-articulo>
     </ng-container>
+
+    <button (click)="comprar()" class="margen2" id="comprar" [hidden]="Articuloscarrito.length==0"> Comprar </button>
     
    
 </div>

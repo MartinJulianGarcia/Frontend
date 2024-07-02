@@ -4,6 +4,7 @@ import { ArticuloService } from '../../Servicios/articulos.service';
 import { ArticuloComponent } from '../main/articulo/articulo.component';
 import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { FooterComponent } from '../footer/footer.component';
+import { HttpService } from '../../Servicios/http.service';
 
 
 @Component({
@@ -20,22 +21,29 @@ export class CarritoComponent implements OnInit {
 
   Articuloscarrito: Array<Articulo>
 
+
+
+  //private httpservice: HttpService
+
   constructor( private ArtService:ArticuloService) { 
     
     
  
      this.Articuloscarrito = [];
     
+    
  
    }
 
    
-
    actualizar() : void {
         
     this.Articuloscarrito=this.ArtService.getcarrito();
 
     alert(this.ArtService.getcarrito());
+
+    
+   
   }
   
   vaciar() : void {
@@ -46,10 +54,17 @@ export class CarritoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.Articuloscarrito = this.ArtService.getcarrito()
+    this.Articuloscarrito = this.ArtService.getcarrito();
+
     
   }
    
+  comprar() : void {
+        
+    alert("Se genero la compra");
+    this.ArtService.SacarCarrito();
+
+  }
 
 
 }

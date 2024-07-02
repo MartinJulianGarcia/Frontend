@@ -4,6 +4,7 @@ import { Articulo } from '../../../Modelo/Articulo';
 import { CommonModule } from '@angular/common';
 
 
+
 @Component({
   selector: 'app-articulo',
   standalone: true,

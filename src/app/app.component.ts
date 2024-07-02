@@ -12,6 +12,7 @@ import { MiscomprasComponent } from './miscompras/miscompras.component';
 import { ArticuloService } from '../Servicios/articulos.service';
 import {  FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormularioComponent } from './formulario/formulario.component';
+import { HttpClient } from '@angular/common/http';
 
 import { routes } from './app.routes';
 

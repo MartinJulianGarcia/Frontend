@@ -3,6 +3,7 @@ import { ArticuloComponent } from './articulo/articulo.component';
 import { Articulo } from '../../Modelo/Articulo';
 import { ArticuloService } from '../../Servicios/articulos.service';
 import { CommonModule, NgFor, NgIf } from '@angular/common';
+import { provideHttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-main',

@@ -1,6 +1,7 @@
 <div class="card">
-    <div class="card-body">
-        <form action="" [formGroup]="formulariodeusuario" (ngSubmit)="procesar()">
+    <div class="card-body" [hidden]="bandera" >
+        <strong> Por favor registrese:</strong> <br>
+        <form action="" style="padding-top: 10px;" [formGroup]="formulariodeusuario" (ngSubmit)="procesar()">
             <div class="mb-2">
             <label class="form-label">
                 Nombre
@@ -36,5 +37,11 @@
     </form>
     </div>
 </div>
+
+<div class="card">
+    <div class="card-body" [hidden]="!bandera" >
+       <strong>Bienvenido {{user.getNombre()}} ya podes revisar tus compras: </strong> 
+    </div>
+<div></div>
 
 <!-- {{formulariodeusuario.get('nombre')?.value }}  esto seria para mostrar lo que voy escribiendo y ver que funcuona -->

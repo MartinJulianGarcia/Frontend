@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable, ObservableInput } from 'rxjs';
 import { Articulo } from '../Modelo/Articulo';
+import { HttpClient } from '@angular/common/http';
+
 
 @Injectable({
   providedIn: 'root'
@@ -10,14 +12,18 @@ export class ArticuloService {
   Articulos : Array<Articulo>
   carrito :   Array<Articulo>
   filtro="todos";
+
+  private apiUrl = 'localhost:8081/api/Articulo';
  // private filtroSubject = new BehaviorSubject<string>('todos');
 // filtro$ = this.filtroSubject.asObservable();
   //private static instanceCount = 0;
 
+  // si agrego private http:HttpClient dejan de andar todas las funciones del servicio
+
   constructor() {
-    const art1 = new Articulo("Remera1", "Remera", 500, 1, 20, "Verano")
-    const art2 = new Articulo("Remera2", "Remera",1000, 2 , 40, "Invierno")
-    const art3 = new Articulo("Remera3", "Remera",1200, 3 , 0, "Verano")
+    const art1 = new Articulo(1,  "Remera1", 20 ,500,   "Verano" ,"Remera")
+    const art2 = new Articulo(2,"Remera2",40 , 1000, "Invierno","Remera")
+    const art3 = new Articulo(3,"Remera3",0, 5000,  "Verano", "Remera")
 
     this.Articulos = [art1, art2, art3]
     this.carrito=[];
@@ -27,8 +33,16 @@ export class ArticuloService {
   
 
   getArticulos(): Array<Articulo> {
+
     return this.Articulos;
+    
+    
   }
+
+  //getArticulosHTTP(): Observable<Articulo> {
+   //return  this.http.get<Articulo>(this.apiUrl);
+  //}
+
 
   getArticulosfiltrados(): Array<Articulo> {
 
@@ -41,6 +55,7 @@ export class ArticuloService {
     {
     return this.Articulos.filter(Articulo => Articulo.getTipo() == this.filtro);
     }
+    
     
   }
 

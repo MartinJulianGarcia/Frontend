@@ -6,14 +6,14 @@ export class Articulo {
     private stock: number;
     private temporada: string;
 
-    constructor(nombre: string, tipo: string, precio: number, id:number, stock: number, temporada: string) {
+    constructor(id:number, nombre: string, stock: number, precio: number, temporada: string, tipo: string,  ) {
         this.nombre = nombre;
         this.tipo = tipo;
         this.precio = precio;
         this.id = id;
         this.stock = stock;
         this.temporada = temporada;
-
+        
         //compras= new ArrayList<>();
     }
 
