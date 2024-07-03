@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, ObservableInput } from 'rxjs';
+import { BehaviorSubject, Observable, ObservableInput,throwError } from 'rxjs';
 import { Articulo } from '../Modelo/Articulo';
 import { HttpClient } from '@angular/common/http';
+import { catchError } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
 
 
 @Injectable({
@@ -13,14 +15,14 @@ export class ArticuloService {
   carrito :   Array<Articulo>
   filtro="todos";
 
-  private apiUrl = 'localhost:8081/api/Articulo';
+  private apiUrl = "localhost:8081/api/Articulo";
  // private filtroSubject = new BehaviorSubject<string>('todos');
 // filtro$ = this.filtroSubject.asObservable();
   //private static instanceCount = 0;
 
   // si agrego private http:HttpClient dejan de andar todas las funciones del servicio
 
-  constructor() {
+  constructor(private http: HttpClient) {
     const art1 = new Articulo(1,  "Remera1", 20 ,500,   "Verano" ,"Remera")
     const art2 = new Articulo(2,"Remera2",40 , 1000, "Invierno","Remera")
     const art3 = new Articulo(3,"Remera3",0, 5000,  "Verano", "Remera")
@@ -39,9 +41,38 @@ export class ArticuloService {
     
   }
 
-  //getArticulosHTTP(): Observable<Articulo> {
-   //return  this.http.get<Articulo>(this.apiUrl);
-  //}
+  getArticulosHTTP(): Observable<Articulo[]> {
+   return  this.http.get<Articulo[]>(this.apiUrl).pipe(catchError(this.handleError));
+
+  }
+
+
+  private handleError(error: HttpErrorResponse) {
+    if (error.status === 401) {
+      // Manejar error de no autorizado
+      alert('No autorizado: 401');
+    } else if (error.status === 403) {
+      // Manejar error de acceso prohibido
+      alert('no se accedio por error 403')
+      console.error('Acceso prohibido:', error.message);
+    } 
+    else if (error.status === 0) {
+      // Manejar error de acceso prohibido
+      alert('no se accedio por error 0')
+      console.error('Acceso prohibido:', error.message);
+    } 
+    else if (error.status > 403) {
+      // Manejar error de acceso prohibido
+      alert('no se accedio por error mayor a 403')
+      console.error('Acceso prohibido:', error.message);
+    } else {
+      // Manejar otros errores
+      alert('no se accedio por otro motivo')
+      console.error('Ocurrió un error:', error.message);
+    }
+    return throwError('Ocurrió un error; por favor intenta nuevamente más tarde.');
+    
+  }
 
 
   getArticulosfiltrados(): Array<Articulo> {
@@ -58,10 +89,6 @@ export class ArticuloService {
     
     
   }
-
- // cambiarFiltro(nuevoFiltro: string): void {
- //   this.filtroSubject.next(nuevoFiltro);
- // }
 
   AgregarCarrito(ar: Articulo) {
     this.carrito.push(ar);

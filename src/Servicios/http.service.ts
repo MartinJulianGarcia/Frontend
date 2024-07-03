@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Articulo } from '../Modelo/Articulo';
 import { ArticuloService } from './articulos.service';
 import { Observable } from 'rxjs';
+import { provideHttpClient } from '@angular/common/http';
 
 
 

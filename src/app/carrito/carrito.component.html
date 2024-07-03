@@ -1,13 +1,17 @@
 <div>
+    <div class="card-body" [hidden]="bandera">
     <h4>Estos son los productos agregados al carrito:</h4>
-    <button (click)="actualizar()"> Actualizar </button>
-    <button (click)="vaciar()" class="margen2" [hidden]="Articuloscarrito.length==0"> Vaciar carrito </button>
+   
+    <button style="margin-top:  20px;"  (click)="vaciar()" class="btn btn-outline-success btn-lg" routerLink="section-a" [hidden]="Articuloscarrito.length==0"> Vaciar carrito </button>
     
     <ng-container *ngFor="let Articulo of Articuloscarrito">
         <app-articulo [Articulo]="Articulo"></app-articulo>
     </ng-container>
 
-    <button (click)="comprar()" class="margen2" id="comprar" [hidden]="Articuloscarrito.length==0"> Comprar </button>
-    
-   
+    <button style="margin-top:  10px;" (click)="comprar()" class="btn btn-outline-success btn-lg" id="comprar" routerLink="section-b" [hidden]="Articuloscarrito.length==0 || bandera"> Comprar </button>
+</div>
+
+
+<div>
+<router-outlet></router-outlet>
 </div>

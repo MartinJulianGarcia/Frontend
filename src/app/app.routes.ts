@@ -8,6 +8,8 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { MiscomprasComponent } from './miscompras/miscompras.component';
 import { MisdatosComponent } from './misdatos/misdatos.component';
 import { CarritoComponent } from './carrito/carrito.component';
+import { FormulariodecompraComponent } from './carrito/formulariodecompra/formulariodecompra.component';
+import { ResumenCarritoComponent } from './carrito/resumen-carrito/resumen-carrito.component';
 
 
 export const routes: Routes = [
@@ -15,7 +17,11 @@ export const routes: Routes = [
     { path: '', component: HomeComponent},
     { path: 'miscompras', component: MiscomprasComponent},
     { path: 'misdatos', component: MisdatosComponent},
-    { path: 'carrito', component: CarritoComponent},
+    { path: 'carrito', component: CarritoComponent, children: [
+        { path: "section-a", component: ResumenCarritoComponent},
+        { path: "section-b", component: FormulariodecompraComponent},
+      ]
+    },
     { path: '**', redirectTo: ''}
   
 

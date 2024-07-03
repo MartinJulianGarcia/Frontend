@@ -1,0 +1,40 @@
+<div [hidden]="bandera2">
+    Ingrese sus datos para terminar la compra
+
+<div class="card">
+    <div class="card-body" [hidden]="bandera2"  >
+        <strong> Por favor Ingrese sus datos:</strong> <br>
+        <form action="" style="padding-top: 10px;" [formGroup]="formulariodecompra" (ngSubmit)="procesar()">
+            <div class="mb-2">
+            <label class="form-label">
+                Direccion
+            </label>
+            <input type="text" class="form-control" formControlName="direccion" placeholder="por favor ingrese su direccion de envio" >
+           
+        </div>
+
+        <div class="mb-2">
+            <label class="form-label">
+                Tarjeta
+            </label>
+            <input type="text" formControlName="tarjeta" class="form-control" placeholder="por favor ingrese su tarjeta"  >
+            
+        </div>
+        
+        
+        <div class="mb-2">
+            <label class="form-label">
+                Email
+            </label>
+            <input type="email" formControlName="email" class="form-control" placeholder="por favor ingrese su email">
+          
+        </div>
+        <button class="btn btn-primary" [disabled]="formulariodecompra.invalid"> Finalizar Compra </button>
+    </form>
+    </div>
+</div>
+
+</div>
+<div  [hidden]="!bandera2">
+ <h1 style="color: rgb(21, 217, 21);"> Muchas Gracias por su compra :)</h1>
+</div>

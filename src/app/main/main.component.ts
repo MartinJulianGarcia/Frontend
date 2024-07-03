@@ -4,6 +4,8 @@ import { Articulo } from '../../Modelo/Articulo';
 import { ArticuloService } from '../../Servicios/articulos.service';
 import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { provideHttpClient } from '@angular/common/http';
+import { HttpService } from '../../Servicios/http.service';
+
 
 @Component({
   selector: 'app-main',
@@ -16,6 +18,9 @@ import { provideHttpClient } from '@angular/common/http';
 export class MainComponent implements OnInit {
 
   Articulos: Array<Articulo>
+  devolucionarts: Array<Articulo>;
+  errorMessage:string | undefined;
+ 
 
   
 
@@ -28,13 +33,14 @@ export class MainComponent implements OnInit {
    // const art3 = new Articulo("Remera3", "Remera",1200, 3 , 0, "Verano")
 
     this.Articulos = []
-   
-    
+    this.devolucionarts=[];
 
   }
 
   ngOnInit(): void {
     this.Articulos = this.ArtService.getArticulosfiltrados()
+    //this.Articulos= this.ArtService.getArticulosHTTP()
+    this.ArtService.getArticulosHTTP().subscribe((art:Articulo[]) => this.devolucionarts= art);
     
   }
 
