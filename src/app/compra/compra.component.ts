@@ -17,10 +17,10 @@ export class CompraComponent {
    @Input () Compra?: Compra
 
 
-   //articulosdelacompra: Array<Articulo>;
+   articulosdelacompra: Array<Compra>;
 
    constructor(userservice: UsuarioService){
-   // this.articulosdelacompra=userservice.getCompras();
+    this.articulosdelacompra=userservice.getCompras();
 
    }
 

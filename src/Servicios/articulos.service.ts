@@ -15,7 +15,7 @@ export class ArticuloService {
   carrito :   Array<Articulo>
   filtro="todos";
 
-  private apiUrl = "localhost:8081/api/Articulo";
+  private apiUrl = "http://localhost:8081/api/Articulo";
  // private filtroSubject = new BehaviorSubject<string>('todos');
 // filtro$ = this.filtroSubject.asObservable();
   //private static instanceCount = 0;
@@ -42,7 +42,9 @@ export class ArticuloService {
   }
 
   getArticulosHTTP(): Observable<Articulo[]> {
-   return  this.http.get<Articulo[]>(this.apiUrl).pipe(catchError(this.handleError));
+  //alert( this.http.get<Articulo[]>(this.apiUrl).pipe(catchError(this.handleError)));
+  return this.http.get<Articulo[]>(this.apiUrl).pipe(catchError(this.handleError));
+   
 
   }
 

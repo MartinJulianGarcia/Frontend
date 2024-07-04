@@ -1,3 +1,5 @@
+import { Compra } from "./Compra";
+
 export class Articulo {
     private nombre: string;
     private tipo: string;
@@ -5,18 +7,19 @@ export class Articulo {
     private id: number;
     private stock: number;
     private temporada: string;
+    compras: Array<Compra>;
 
-    constructor(id:number, nombre: string, stock: number, precio: number, temporada: string, tipo: string,  ) {
+    constructor(id:number, nombre: string, stock: number, precio: number, temporada: string, tipo: string, compras:Array<Compra>=[]  ) {
         this.nombre = nombre;
         this.tipo = tipo;
         this.precio = precio;
         this.id = id;
         this.stock = stock;
         this.temporada = temporada;
-        
-        //compras= new ArrayList<>();
-    }
 
+        this.compras= compras
+    }
+   
     // Métodos getter y setter para acceder a los atributos privados
 
     getNombre(): string {

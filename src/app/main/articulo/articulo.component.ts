@@ -38,7 +38,7 @@ export class ArticuloComponent  {
       {
         this.ArtService.AgregarCarrito( this.Articulo);
 
-        alert(this.ArtService.getcarrito());
+        //alert(this.ArtService.getcarrito());
       }
     
 

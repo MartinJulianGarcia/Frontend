@@ -41,7 +41,7 @@ export class MainComponent implements OnInit {
     this.Articulos = this.ArtService.getArticulosfiltrados()
     //this.Articulos= this.ArtService.getArticulosHTTP()
     this.ArtService.getArticulosHTTP().subscribe((art:Articulo[]) => this.devolucionarts= art);
-    
+    console.log(this.devolucionarts)
   }
 
   actualizar(): void {
