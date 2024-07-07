@@ -2,6 +2,7 @@ import { Articulo } from "./Articulo";
 import { Usuario } from "./Usuario";
 
 
+
 export class Compra {
     private id: number;
     private fecha: number;
@@ -9,6 +10,7 @@ export class Compra {
     private mediodepago: string;
     private Arts: Array<Articulo>;
     private idusuario:number;
+
 
     constructor(mediodepago: string, id: number, importe: number, arts: Array<Articulo>, iduser:number, fecha: number) {
 
@@ -23,6 +25,7 @@ export class Compra {
 
         //compras= new ArrayList<>();
     }
+
 
     // Métodos getter y setter para acceder a los atributos privados
 

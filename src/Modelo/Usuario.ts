@@ -2,57 +2,59 @@ import { Compra } from "./Compra";
 
 
 export class Usuario {
-    private nombre: string;
-    private contraseña: string;
-    private email: string;
-    private compras: Array<Compra>;
-    private id: number;
+    private username: string;
+    private password: string;
+    private mail: string;
+    private miscompras: Array<Compra>;
+    private id?: number;
 
-    constructor(nombre: string, contra: string, email: string, compras: Array<Compra>=[], id:number=0) {
-        this.nombre = nombre;
-        this.contraseña = contra;
-        this.email = email;
-        this.compras= compras;
-        this.id=id;
+    constructor(nombre: string, contra: string, email: string, compras: Array<Compra>=[]) {
+        this.username = nombre;
+        this.password = contra;
+        this.mail = email;
+        this.miscompras= compras;
+        
+        
+       
 
     }
 
     // Métodos getter y setter para acceder a los atributos privados
 
     getNombre(): string {
-        return this.nombre;
+        return this.username;
     }
 
     setNombre(nombre: string): void {
-        this.nombre = nombre;
+        this.username = nombre;
     }
 
     getContra(): string {
-        return this.contraseña;
+        return this.password;
     }
 
     setContra(contra: string): void {
-        this.contraseña= contra;
+        this.password= contra;
     }
 
     getTipo(): string {
-        return this.contraseña;
+        return this.password;
     }
 
     setTipo(contraseña: string): void {
-        this.contraseña= contraseña;
+        this.password= contraseña;
     }
 
 
     getEmail(): string {
-        return this.email;
+        return this.mail;
     }
 
-    setEmail(email: string): void {
-        this.email = email;
+    setEmail(mail: string): void {
+        this.mail = mail;
     }
 
-    getId(): number {
+      getId(): number | undefined {
         return this.id;
     }
 
@@ -61,6 +63,6 @@ export class Usuario {
     }
 
     Tienepermiso():boolean {
-        return this.email.endsWith('@supervisor.com');
+        return this.mail.endsWith('@supervisor.com');
     }
 }

@@ -3,6 +3,9 @@ import { ReactiveFormsModule, FormsModule} from '@angular/forms';
 import { FormControl, Validators,FormGroup } from '@angular/forms';  // cuando se importan componentes van solo aca, los modulos se importan tamb abajo
 import { Usuario } from '../../Modelo/Usuario';
 import { UsuarioService } from '../../Servicios/usuario.service';
+import { ArticuloService } from '../../Servicios/articulos.service';
+import { Compra } from '../../Modelo/Compra';
+import { CompraService } from '../../Servicios/compra.service';
 
 @Component({
   selector: 'app-formulario',
@@ -22,7 +25,7 @@ export class FormularioComponent {
   user:Usuario;
   bandera:boolean;
 
-  constructor( private userservice:UsuarioService){
+  constructor( private userservice:UsuarioService, private artservice:ArticuloService, private compraservice: CompraService){
     this.user=new Usuario("juan", "falso","1");
     this.bandera=false;
     
@@ -40,9 +43,13 @@ export class FormularioComponent {
 
       console.log(this.formulariodeusuario.value)
       this.user = new Usuario(this.formulariodeusuario.value.nombre!,this.formulariodeusuario.value.contra!,this.formulariodeusuario.value.email!);
-      this.userservice.AgregarUsuario(this.user);
-      alert(this.user)
+      this.userservice.iniciarsesion(this.user).subscribe((user: Usuario) => {
+        console.log(user);})
+        
+
+      //alert(this.user)
       this.bandera=true;
+      
     }
 
 }

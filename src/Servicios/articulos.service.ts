@@ -4,7 +4,7 @@ import { Articulo } from '../Modelo/Articulo';
 import { HttpClient } from '@angular/common/http';
 import { catchError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
-
+import { map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +15,7 @@ export class ArticuloService {
   carrito :   Array<Articulo>
   filtro="todos";
 
-  private apiUrl = "http://localhost:8081/api/Articulo";
+  apiUrl: string = "http://localhost:8081/api/Articulo";
  // private filtroSubject = new BehaviorSubject<string>('todos');
 // filtro$ = this.filtroSubject.asObservable();
   //private static instanceCount = 0;
@@ -43,7 +43,8 @@ export class ArticuloService {
 
   getArticulosHTTP(): Observable<Articulo[]> {
   //alert( this.http.get<Articulo[]>(this.apiUrl).pipe(catchError(this.handleError)));
-  return this.http.get<Articulo[]>(this.apiUrl).pipe(catchError(this.handleError));
+
+  return this.http.get<Articulo[]>(this.apiUrl).pipe(map(data => data.map(item => Articulo.fromJson(item))),catchError(this.handleError));
    
 
   }
@@ -99,6 +100,8 @@ export class ArticuloService {
 
 
   SacarCarrito() {
+
+   
     while(this.carrito.length>0)
       {
         this.carrito.pop();
@@ -119,7 +122,12 @@ export class ArticuloService {
 
   setfiltro( filtro: string)
   {
+    alert("se cambio el filtro");
     this.filtro=filtro;
+  }
+  getfiltro( ): string
+  {
+    return this.filtro;
   }
 
 }

@@ -27,7 +27,7 @@ export class SidebarComponent {
 filtrar(fil :string) {
   
   this.ArtService.setfiltro(fil);
-  alert("se cambio el filtro");
+
 
   this.filtrochange.emit();
 

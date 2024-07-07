@@ -1,3 +1,13 @@
 <div>
+    <ng-container *ngIf="!banderausuarioiniciado">
 <app-formulario></app-formulario>
+    </ng-container>
+
+    <ng-container *ngIf="banderausuarioiniciado">
+    <div class="card">
+        <div class="card-body" [hidden]="!banderausuarioiniciado" >
+           <h4>Bienvenido <strong style="color: rgb(90, 52, 125);">{{nombreusuario}}</strong> ya podes revisar tus compras: </h4> 
+        </div>
+    </div>
+    </ng-container>
 </div>

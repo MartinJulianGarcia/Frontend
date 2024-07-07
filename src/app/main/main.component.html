@@ -2,9 +2,11 @@
 
 <h4 (filtrochange)="actualizar()">Articulos:</h4>
 <br>
-<ng-container *ngFor="let Articulo of Articulos" (filtrochange)="actualizar()">
-<ng-container *ngIf="Articulo.getStock()>0">
+<ng-container *ngIf="devolucionarts && devolucionarts.length>0">
+<ng-container *ngFor="let Articulo of devolucionarts" (filtrochange)="actualizar()">  <!-- Solo funciona con la lista Artuculos, la devuelta por http no-->
+<ng-container >   <!-- *ngIf="Articulo.getStock()>0" no puedo colocarlo pq hasta que no vuelve el observable tira error-->
    <app-articulo [Articulo]="Articulo"  ></app-articulo>
+</ng-container>
 </ng-container>
 
  </ng-container>

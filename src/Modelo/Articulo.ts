@@ -7,9 +7,9 @@ export class Articulo {
     private id: number;
     private stock: number;
     private temporada: string;
-    compras: Array<Compra>;
+    comprasconesteart: Array<Compra>;
 
-    constructor(id:number, nombre: string, stock: number, precio: number, temporada: string, tipo: string, compras:Array<Compra>=[]  ) {
+    constructor(id:number, nombre: string, stock: number, precio: number, temporada: string, tipo: string, comprasconesteart:Array<Compra>=[]  ) {
         this.nombre = nombre;
         this.tipo = tipo;
         this.precio = precio;
@@ -17,8 +17,19 @@ export class Articulo {
         this.stock = stock;
         this.temporada = temporada;
 
-        this.compras= compras
+        this.comprasconesteart= comprasconesteart;
     }
+
+    static fromJson(json: any): Articulo {
+        return new Articulo(
+          json.id,
+          json.nombre,
+          json.precio,
+          json.stock,
+          json.temporada,
+          json.tipo
+        );
+      }
    
     // Métodos getter y setter para acceder a los atributos privados
 
@@ -71,6 +82,6 @@ export class Articulo {
     }
 
     puedeMostrarse():boolean {
-        return this.stock>0;
+        return this.stock > 0;
     }
 }

@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { Compra } from '../../Modelo/Compra';
+import { Compra } from '../../../Modelo/Compra';
 import { Input } from '@angular/core';
-import { Articulo } from '../../Modelo/Articulo';
-import { UsuarioService } from '../../Servicios/usuario.service';
+import { Articulo } from '../../../Modelo/Articulo';
+import { UsuarioService } from '../../../Servicios/usuario.service';
 
 
 @Component({
@@ -17,10 +17,10 @@ export class CompraComponent {
    @Input () Compra?: Compra
 
 
-   articulosdelacompra: Array<Compra>;
+   //articulosdelacompra: Array<Compra>;
 
    constructor(userservice: UsuarioService){
-    this.articulosdelacompra=userservice.getCompras();
+    //this.articulosdelacompra=userservice.getCompras();
 
    }
 

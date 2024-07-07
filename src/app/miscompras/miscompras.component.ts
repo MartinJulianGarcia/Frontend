@@ -1,12 +1,13 @@
 import { NgFor, NgIf } from '@angular/common';
-import { Component, input } from '@angular/core';
+import { Component, input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Compra } from '../../Modelo/Compra';
-import { CompraComponent } from '../compra/compra.component';
+import { CompraComponent } from './compra/compra.component';
 import { UsuarioService } from '../../Servicios/usuario.service';
 import { HttpClient } from '@angular/common/http';
 import { provideHttpClient } from '@angular/common/http';
 import { HttpService } from '../../Servicios/http.service';
 import { HttpClientModule } from '@angular/common/http';
+import { CompraService } from '../../Servicios/compra.service';
 
 
 @Component({
@@ -17,17 +18,46 @@ import { HttpClientModule } from '@angular/common/http';
   templateUrl: './miscompras.component.html',
   styleUrl: './miscompras.component.css'
 })
-export class MiscomprasComponent {
+export class MiscomprasComponent implements OnInit, OnChanges{
 
-  Compras: Array<Compra> 
+  Compras: Array<Compra> =[]
 
-  constructor (private userservice: UsuarioService,private http: HttpService){
+  banderausuarioiniciado=false
 
-    this.Compras=userservice.getCompras();
+  nombredeusuario="";
+
+  constructor (private userservice: UsuarioService,private http: HttpService,private compraservice:CompraService){
+
+
     
 
 
   }
+
+  ngOnInit(): void {
+      this.Compras=this.compraservice.getCompras()
+      if(localStorage.length>0)
+        {
+          this.banderausuarioiniciado=true;
+          const nombre=localStorage.getItem('username')
+          if(nombre!=null)
+          {
+             this.nombredeusuario=nombre;
+          }
+          else{
+            this.nombredeusuario="";
+          }
+          
+        }
+     
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.Compras=this.compraservice.getCompras()
+   // alert(this.userservice.getCompras());
+  }
+
+
 
 
 
