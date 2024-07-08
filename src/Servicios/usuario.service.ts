@@ -85,7 +85,7 @@ export class UsuarioService {
 
   iniciarsesion(u:Usuario) : Observable<Usuario>
   {
-    alert("estamosintentandocrearunusuario");
+    alert("Se ha iniciado sesion, bienvenido");
     this.usuario=new Usuario(u.getNombre(),u.getContra(),u.getEmail(),[]);
     localStorage.setItem('username', u.getNombre());
     localStorage.setItem('password', u.getContra());

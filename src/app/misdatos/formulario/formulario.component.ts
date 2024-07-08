@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { ReactiveFormsModule, FormsModule} from '@angular/forms';
 import { FormControl, Validators,FormGroup } from '@angular/forms';  // cuando se importan componentes van solo aca, los modulos se importan tamb abajo
-import { Usuario } from '../../Modelo/Usuario';
-import { UsuarioService } from '../../Servicios/usuario.service';
-import { ArticuloService } from '../../Servicios/articulos.service';
-import { Compra } from '../../Modelo/Compra';
-import { CompraService } from '../../Servicios/compra.service';
+import { Usuario } from '../../../Modelo/Usuario';
+import { UsuarioService } from '../../../Servicios/usuario.service';
+import { ArticuloService } from '../../../Servicios/articulos.service';
+import { Compra } from '../../../Modelo/Compra';
+import { CompraService } from '../../../Servicios/compra.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-formulario',
@@ -25,7 +26,7 @@ export class FormularioComponent {
   user:Usuario;
   bandera:boolean;
 
-  constructor( private userservice:UsuarioService, private artservice:ArticuloService, private compraservice: CompraService){
+  constructor( private userservice:UsuarioService, private artservice:ArticuloService, private compraservice: CompraService, private router: Router, private route: ActivatedRoute){
     this.user=new Usuario("juan", "falso","1");
     this.bandera=false;
     
@@ -46,7 +47,7 @@ export class FormularioComponent {
       this.userservice.iniciarsesion(this.user).subscribe((user: Usuario) => {
         console.log(user);})
         
-
+        this.router.navigate(['/']);
       //alert(this.user)
       this.bandera=true;
       

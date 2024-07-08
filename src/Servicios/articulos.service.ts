@@ -125,6 +125,7 @@ export class ArticuloService {
     alert("se cambio el filtro");
     this.filtro=filtro;
   }
+  
   getfiltro( ): string
   {
     return this.filtro;

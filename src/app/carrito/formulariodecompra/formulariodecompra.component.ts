@@ -87,7 +87,7 @@ export class FormulariodecompraComponent {
   comprar(c: Compra) : void {
         
     
-    alert('Agregado al carrito');
+    alert('se ha realizado la compra con exito');
     if (c==undefined)
       {
 
@@ -98,7 +98,7 @@ export class FormulariodecompraComponent {
 
       }
     this.bandera=true;
-    alert (this.compra.getImporte());
+    //alert (this.compra.getImporte());
   }
 
 

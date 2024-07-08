@@ -20,7 +20,7 @@ export class MainComponent implements OnInit {
   Articulos: Array<Articulo>=[]
   devolucionarts: Array<Articulo>=[];
   errorMessage:string | undefined;
-  filtro="todos";
+  filtro="remera";
  
 
   
@@ -44,7 +44,8 @@ export class MainComponent implements OnInit {
     this.ArtService.getArticulosHTTP().subscribe((art) => {console.log(art); this.devolucionarts=art; console.log( art.length)});
     console.log("algo hace pero no devuelve datos: "+ this.devolucionarts.length )
 
-    this.filtro=this.ArtService.getfiltro();
+    //alert(this.ArtService.getfiltro());
+    this.filtro=this.ArtService.getfiltro()
 
     //this.Articulos=this.devolucionarts.filter(Articulo => Articulo.getTipo() == "remera");
    

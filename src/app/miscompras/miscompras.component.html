@@ -3,11 +3,11 @@
     <ng-container *ngIf="banderausuarioiniciado">
         <div class="card">
         <div class="card-body" >
-    <h4>Bienvenido <strong style="color: rgb(90, 52, 125);">{{nombredeusuario}}</strong> es un listado de tus compras:</h4>
+    <h4>Bienvenido <strong style="color: rgb(90, 52, 125);">{{nombredeusuario}}</strong>, este es un listado de tus compras:</h4>
         </div>
         </div>
     <ng-container *ngFor="let compra of Compras">
-        <app-compra [Compra]="compra"></app-compra>
+        <app-compra style="margin-top: 10px;" [Compra]="compra"></app-compra>
     </ng-container>
     </ng-container>
     <ng-container *ngIf="!banderausuarioiniciado">

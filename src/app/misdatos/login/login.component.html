@@ -1,0 +1,35 @@
+<div class="card">
+    <div class="card-body" [hidden]="bandera" >
+        <strong> Inicie sesion:</strong> <br>
+        <form action="" style="padding-top: 10px;" [formGroup]="formulariodeusuario" (ngSubmit)="procesar()">
+            <div class="mb-2">
+            <label class="form-label">
+                Nombre
+            </label>
+            <input type="text" class="form-control" formControlName="nombre" placeholder="por favor ingrese su nombre" >
+            <div class="alert alert-danger mt-2" [hidden]="formulariodeusuario.get('nombre')?.valid || formulariodeusuario.get('nombre')?.pristine" >   <!-- [hidden]="nombre.valid || nombre.pristine" -->
+              
+                El nombre es obligatorio
+            </div>
+        </div>
+
+        <div class="mb-2">
+            <label class="form-label">
+                Contraseña
+            </label>
+            <input type="text" formControlName="contra" class="form-control" placeholder="por favor ingrese su contraseña"  >
+            <div class="alert alert-danger mt-2" [hidden]="formulariodeusuario.get('contra')?.valid || formulariodeusuario.get('contra')?.pristine" > <!--[hidden]="contra.valid || contra.pristine"-->
+                La contraseña es obligatorio
+            </div>
+        </div>
+        
+        <button class="btn btn-primary" [disabled]="formulariodeusuario.invalid"> registrarme </button>
+    </form>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body" [hidden]="!bandera" >
+       <strong>Bienvenido {{user.getNombre()}} ya podes revisar tus compras: </strong> 
+    </div>
+<div></div>

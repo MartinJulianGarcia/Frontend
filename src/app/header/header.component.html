@@ -6,12 +6,10 @@
         </a>
 
         <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
-            <ng-container *ngIf="banderausuarioiniciado">
-            <button class="btn btn-light" (click)="cerrarsesion()"   style="background-color: rgb(170, 113, 223);" routerLink="misdatos" routerLinkActive="active">Cerrar sesion</button>
-            </ng-container>
+       
    
             
-            <a class="btn btn-light" routerLink="misdatos"  routerLinkActive="active">Registrarme</a>
+            <a class="btn btn-light" routerLink="misdatos"  routerLinkActive="active">{{ banderausuarioiniciado ? 'Sesion' : 'Sesion' }}</a>
             <a class="btn btn-light" routerLink="miscompras" routerLinkActive="active">Mis Compras</a>
             <a class="btn btn-light" routerLink="carrito"> Carrito </a>
         </nav>

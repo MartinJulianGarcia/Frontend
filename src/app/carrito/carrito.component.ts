@@ -10,6 +10,7 @@ import { Validators } from '@angular/forms';
 import { ReactiveFormsModule, FormsModule} from '@angular/forms';
 import { RouterOutlet } from '@angular/router';
 import { RouterModule } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -31,7 +32,7 @@ export class CarritoComponent implements OnInit {
 
   //private httpservice: HttpService
 
-  constructor( private ArtService:ArticuloService) { 
+  constructor( private ArtService:ArticuloService, private router: Router, private route: ActivatedRoute) { 
     
  
      this.Articuloscarrito = [];
@@ -73,14 +74,22 @@ export class CarritoComponent implements OnInit {
 
     
   }
+
+  
    
   comprar() : void {
-        
-    alert("Se genero la compra");
-    //this.ArtService.SacarCarrito();
-    this.bandera=true;
 
-  }
+    if(localStorage.length>0)
+      {
+        this.bandera=true;
+      }
+        else{
+          alert("debe estar logueado para comprar");
+          this.router.navigate(['/misdatos']);  //, { relativeTo: this.route }
+        }
+        
+      }
+        
 
 
 }
