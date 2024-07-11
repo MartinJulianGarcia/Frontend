@@ -61,7 +61,7 @@ export class LoginComponent {
           
           this.bandera=true;
 
-          alert ("wlecome"+ this.user.getNombre());
+          alert ("welcome  "+ this.user.getNombre());
         }
       })
       

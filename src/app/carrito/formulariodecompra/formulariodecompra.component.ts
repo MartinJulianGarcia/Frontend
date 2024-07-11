@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormGroup,FormControl } from '@angular/forms';
+import { FormGroup,FormControl, MinLengthValidator } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { ReactiveFormsModule, FormsModule} from '@angular/forms';
 import { ArticuloService } from '../../../Servicios/articulos.service';
@@ -43,7 +43,7 @@ export class FormulariodecompraComponent {
  
    }
 
-   formulariodecompra = new FormGroup({'tarjeta':new FormControl("",Validators.required),  
+   formulariodecompra = new FormGroup({'tarjeta':new FormControl("",[Validators.required,Validators.minLength(10), Validators.pattern('^[0-9]+$')]),  
     'direccion':new FormControl("",Validators.required), 'email':new FormControl("",[Validators.required,Validators.email]) } )
 
     procesar () {

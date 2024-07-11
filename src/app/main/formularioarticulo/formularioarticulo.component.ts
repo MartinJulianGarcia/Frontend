@@ -66,7 +66,7 @@ get nombre () {
 }
 
  formulariodearticulo = new FormGroup({'nombre':new FormControl("",Validators.required),  
-   'stock':new FormControl("",Validators.required),'precio':new FormControl("",Validators.required),
+   'stock':new FormControl("",[Validators.required, Validators.pattern('^[0-9]+$')]),'precio':new FormControl("",[Validators.required, Validators.pattern('^[0-9]+$')]),
    'temporada':new FormControl("",Validators.required), 'tipo':new FormControl("",[Validators.required]) } )
 
    procesar () {
