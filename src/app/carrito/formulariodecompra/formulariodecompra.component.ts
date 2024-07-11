@@ -26,6 +26,9 @@ export class FormulariodecompraComponent {
   bandera2=false;
   compra:Compra;
   importe:number=0;
+  username:string | null;
+  articulosvacio:Array<Articulo>=[]
+  responseData: any | undefined;
 
 
   //private httpservice: HttpService
@@ -34,8 +37,9 @@ export class FormulariodecompraComponent {
     
  
      this.Articuloscarrito = [];
-     this.compra= new Compra("tajeta",2,this.importe,this.Articuloscarrito,1,Date.now());
-    
+     this.compra= new Compra(this.importe,"juan",this.Articuloscarrito);
+     this.username=localStorage.getItem("username")
+     
  
    }
 
@@ -44,6 +48,11 @@ export class FormulariodecompraComponent {
 
     procesar () {
 
+       this.username=localStorage.getItem("username")
+
+      if(localStorage.length>0 && this.username!=null){
+
+        
       console.log(this.formulariodecompra.value)
       //this.user = new Usuario(this.formulariodeusuario.value.nombre!,this.formulariodeusuario.value.contra!,this.formulariodeusuario.value.email!);
       //this.userservice.AgregarUsuario(this.user);
@@ -53,11 +62,26 @@ export class FormulariodecompraComponent {
       this.Articuloscarrito.forEach(art => {this.importe= this.importe + art.getprecio()
         
       });
-      this.compra=new Compra("tarjeta",2,this.importe,this.Articuloscarrito,1,Date.now())
+
+      
+      this.compra=new Compra(this.importe,this.username,this.articulosvacio)
       this.comprar(this.compra);
+      this.compraservice.AgregarCompra(this.compra).subscribe((compra1: any) => {
+        console.log(compra1); 
+        this.responseData=compra1;
+
+          this.compra.setId(this.responseData.Id)
+      
+      })
+      this.compraservice.agregaralcarrito(this.compra);
+
      // this.usuarioservice.AgregarCompra(this.compra);
       this.ArtService.SacarCarrito();
       this.cdr.detectChanges();
+
+
+      }
+
     }
 
    
@@ -88,15 +112,15 @@ export class FormulariodecompraComponent {
         
     
     alert('se ha realizado la compra con exito');
-    if (c==undefined)
-      {
+   // if (c==undefined)
+   //   {
 
-      }
-      else
-      {
-        this.compraservice.AgregarCompra(c);
+    //  }
+     // else
+     // {
+       // this.compraservice.AgregarCompra(c);
 
-      }
+     // }
     this.bandera=true;
     //alert (this.compra.getImporte());
   }

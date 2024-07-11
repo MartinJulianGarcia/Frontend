@@ -5,12 +5,13 @@ import { ArticuloService } from '../../Servicios/articulos.service';
 import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { provideHttpClient } from '@angular/common/http';
 import { HttpService } from '../../Servicios/http.service';
+import { FormularioarticuloComponent } from './formularioarticulo/formularioarticulo.component';
 
 
 @Component({
   selector: 'app-main',
   standalone: true,
-  imports: [NgFor,NgIf,ArticuloComponent],   // como son Standalone, debo importar los modulos y no usar un app.module.ts
+  imports: [NgFor,NgIf,ArticuloComponent, FormularioarticuloComponent],   // como son Standalone, debo importar los modulos y no usar un app.module.ts
   templateUrl: './main.component.html',
   styleUrl: './main.component.css'
 })
@@ -20,7 +21,8 @@ export class MainComponent implements OnInit {
   Articulos: Array<Articulo>=[]
   devolucionarts: Array<Articulo>=[];
   errorMessage:string | undefined;
-  filtro="remera";
+  filtro="todos";
+  bandera=true;
  
 
   
@@ -55,9 +57,14 @@ export class MainComponent implements OnInit {
 
   actualizar(): void {
 
-   
+    if(this.bandera=true){
+      this.bandera=false
+    }
+    else {
+    this.bandera=true;
+  }
    //this.Articulos = this.ArtService.getArticulosfiltrados();
-   alert('el evento si funciona pero no se actualiza la vista')
+  // alert('el evento si funciona pero no se actualiza la vista')
 
   }
 

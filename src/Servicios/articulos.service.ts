@@ -3,7 +3,7 @@ import { BehaviorSubject, Observable, ObservableInput,throwError } from 'rxjs';
 import { Articulo } from '../Modelo/Articulo';
 import { HttpClient } from '@angular/common/http';
 import { catchError } from 'rxjs';
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse,HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs';
 
 @Injectable({
@@ -23,9 +23,9 @@ export class ArticuloService {
   // si agrego private http:HttpClient dejan de andar todas las funciones del servicio
 
   constructor(private http: HttpClient) {
-    const art1 = new Articulo(1,  "Remera1", 20 ,500,   "Verano" ,"Remera")
-    const art2 = new Articulo(2,"Remera2",40 , 1000, "Invierno","Remera")
-    const art3 = new Articulo(3,"Remera3",0, 5000,  "Verano", "Remera")
+    const art1 = new Articulo(  "Remera1", 20 ,500,   "Verano" ,"Remera")
+    const art2 = new Articulo("Remera2",40 , 1000, "Invierno","Remera")
+    const art3 = new Articulo("Remera3",0, 5000,  "Verano", "Remera")
 
     this.Articulos = [art1, art2, art3]
     this.carrito=[];
@@ -44,10 +44,28 @@ export class ArticuloService {
   getArticulosHTTP(): Observable<Articulo[]> {
   //alert( this.http.get<Articulo[]>(this.apiUrl).pipe(catchError(this.handleError)));
 
+  
   return this.http.get<Articulo[]>(this.apiUrl).pipe(map(data => data.map(item => Articulo.fromJson(item))),catchError(this.handleError));
    
 
   }
+
+  PostArticulosHTTP(art:Articulo): Observable<Articulo> {
+    //alert( this.http.get<Articulo[]>(this.apiUrl).pipe(catchError(this.handleError)));
+  
+    //return this.http.post<Articulo>(this.apiUrl, art).pipe(catchError(this.handleError));   ESTE SIN AUTH FUNCIONA OK
+    const username = localStorage.getItem('username');
+    const password = localStorage.getItem('password');
+    
+    if (!username || !password) {
+      throw new Error('No authentication data found');
+    }
+    const headers = { 'Authorization': 'Basic ' + btoa(username + ":" + password)}
+    return this.http.post<Articulo>(this.apiUrl, art, {headers}).pipe(catchError(this.handleError));
+     
+     
+  
+    }
 
 
   private handleError(error: HttpErrorResponse) {
@@ -61,7 +79,7 @@ export class ArticuloService {
     } 
     else if (error.status === 0) {
       // Manejar error de acceso prohibido
-      alert('no se accedio por error 0')
+      alert('No se puede conectar al servidor, error 0')
       console.error('Acceso prohibido:', error.message);
     } 
     else if (error.status > 403) {
@@ -125,7 +143,7 @@ export class ArticuloService {
     alert("se cambio el filtro");
     this.filtro=filtro;
   }
-  
+
   getfiltro( ): string
   {
     return this.filtro;

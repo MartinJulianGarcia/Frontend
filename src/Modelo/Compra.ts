@@ -4,23 +4,22 @@ import { Usuario } from "./Usuario";
 
 
 export class Compra {
-    private id: number;
-    private fecha: number;
+    private id?: number;
     private importe: number;
-    private mediodepago: string;
-    private Arts: Array<Articulo>;
-    private idusuario:number;
+    private articulos: Array<Articulo>;
+    private nombreusuario:String;
+
+    // los nombres deben ser los mismos que tienen en el backend, no importa tanto el orden pero si que sea el mismo nombre
 
 
-    constructor(mediodepago: string, id: number, importe: number, arts: Array<Articulo>, iduser:number, fecha: number) {
+    constructor(  importe: number,  nombreusuario: string, arts: Array<Articulo>,) {
 
 
-        this.fecha=fecha;
         this.importe=importe;
-        this.mediodepago =mediodepago;
-        this.id=id;
-        this.Arts=arts;
-        this.idusuario=iduser;
+       // this.id=id;
+         this.nombreusuario=nombreusuario;
+        this.articulos=arts;
+        
 
 
         //compras= new ArrayList<>();
@@ -31,15 +30,7 @@ export class Compra {
 
   
 
-    getmediodepago(): string {
-        return this.mediodepago;
-    }
-
-    setmediodepago(nombre: string): void {
-        this.mediodepago = nombre;
-    }
-
-    getId(): number {
+    getId(): number | undefined {
         return this.id;
     }
 
@@ -57,29 +48,29 @@ export class Compra {
     }
 
     getArts(): Array<Articulo> {
-        return this.Arts;
+        return this.articulos;
     }
 
     setArts(arts: Array<Articulo>): void {
-        this.Arts = arts;
+        this.articulos = arts;
     }
 
-    getUsuario(): number {
-        return this.idusuario;
+    getUsuario(): String {
+        return this.nombreusuario;
     }
 
-    setUsuario(user: number): void {
-        this.idusuario = user;
+    setUsuario(nombreusuario: string): void {
+        this.nombreusuario = nombreusuario;
     }
 
     
-    getfecha(): number {
-        return this.fecha;
-    }
+    //getfecha(): number {
+    //    return this.fecha;
+    //}
 
-    setfecha(fecha: number): void {
-        this.fecha = fecha;
-    }
+    //setfecha(fecha: number): void {
+    //    this.fecha = fecha;
+    //}
 
    //Tienepermiso():boolean {
    //     return this.email.endsWith('@supervisor.com');

@@ -7,6 +7,7 @@ import { ArticuloService } from '../../../Servicios/articulos.service';
 import { Compra } from '../../../Modelo/Compra';
 import { CompraService } from '../../../Servicios/compra.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { errorContext } from 'rxjs/internal/util/errorContext';
 
 @Component({
   selector: 'app-formulario',
@@ -44,12 +45,26 @@ export class FormularioComponent {
 
       console.log(this.formulariodeusuario.value)
       this.user = new Usuario(this.formulariodeusuario.value.nombre!,this.formulariodeusuario.value.contra!,this.formulariodeusuario.value.email!);
-      this.userservice.iniciarsesion(this.user).subscribe((user: Usuario) => {
-        console.log(user);})
+      this.userservice.RegistrarUsuario(this.user).subscribe((user: Usuario) => {
+        console.log(user);
+        if (user!=undefined)
+        {  localStorage.setItem('username', this.user.getNombre());
+          localStorage.setItem('password', this.user.getContra());
+          
+          this.bandera=true;
+
+          alert ("wlecome"+ this.user.getNombre());
+        }
+        else{
+          this.bandera=false;
+        }
+      })
+
+        
         
         this.router.navigate(['/']);
       //alert(this.user)
-      this.bandera=true;
+    
       
     }
 

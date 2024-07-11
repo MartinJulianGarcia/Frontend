@@ -1,0 +1,61 @@
+<div class="card">
+    <div class="card-body" [hidden]="bandera" >
+        <strong> Ingrese los datos del articulo:</strong> <br>
+        <form action="" style="padding-top: 10px;" [formGroup]="formulariodearticulo" (ngSubmit)="procesar()">
+            <div class="mb-2">
+            <label class="form-label">
+               <strong>Nombre</strong> 
+            </label>
+            <input type="text" class="form-control" formControlName="nombre" placeholder="por favor ingrese su nombre" >
+             <div class="alert alert-danger mt-2" [hidden]="formulariodearticulo.get('nombre')?.valid || formulariodearticulo.get('nombre')?.pristine" >   <!-- [hidden]="nombre.valid || nombre.pristine" -->
+              
+                El nombre es obligatorio
+            </div>
+        </div>
+
+        <div class="mb-2">
+            <label class="form-label">
+                <strong> Stock</strong>
+            </label>
+            <input type="stock" formControlName="stock" class="form-control" placeholder="por favor ingrese el stock del articulo"  >
+            <div class="alert alert-danger mt-2" [hidden]="formulariodearticulo.get('stock')?.valid || formulariodearticulo.get('stock')?.pristine" > <!--[hidden]="contra.valid || contra.pristine"-->
+               El stock es obligatorio 
+            </div>
+        </div>
+        
+        
+        <div class="mb-2">
+            <label class="form-label">
+                precio
+            </label>
+            <input type="precio" formControlName="precio" class="form-control" placeholder="por favor ingrese el precio">
+            <div class="alert alert-danger mt-2" [hidden]="formulariodearticulo.get('precio')?.valid || formulariodearticulo.get('precio')?.pristine"> <!-- [hidden]="email.valid || email.pristine" -->
+                El precio es obligatorio
+            </div>
+        </div>
+        <div class="mb-2">
+            <label class="form-label">
+               <strong>Temporada</strong> 
+            </label>
+          
+        </div>
+        
+        <div *ngFor="let item of items">
+            <input type="radio" [value]="item.value" formControlName="temporada" [(ngModel)]="selectedValue">{{ item.display }}
+          </div>
+
+        <div class="mb-2">
+            <label class="form-label">
+                <strong> Tipo</strong>
+            </label>
+              
+        <div *ngFor="let itemtipo of itemstipo">
+            <input type="radio" [value]="itemtipo.value" formControlName="tipo" [(ngModel)]="selectedValue2">{{ itemtipo.display }}
+          </div>
+        </div>
+
+        <button class="btn btn-primary" [disabled]="formulariodearticulo.invalid"  > Agregar </button>
+    </form>
+    </div>
+</div>
+

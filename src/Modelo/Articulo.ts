@@ -4,16 +4,16 @@ export class Articulo {
     private nombre: string;
     private tipo: string;
     private precio: number;
-    private id: number;
+    private id?: number;
     private stock: number;
     private temporada: string;
     comprasconesteart: Array<Compra>;
 
-    constructor(id:number, nombre: string, stock: number, precio: number, temporada: string, tipo: string, comprasconesteart:Array<Compra>=[]  ) {
+    constructor( nombre: string, stock: number, precio: number, temporada: string, tipo: string, comprasconesteart:Array<Compra>=[]  ) {
         this.nombre = nombre;
         this.tipo = tipo;
         this.precio = precio;
-        this.id = id;
+      //  this.id = id;
         this.stock = stock;
         this.temporada = temporada;
 
@@ -22,7 +22,7 @@ export class Articulo {
 
     static fromJson(json: any): Articulo {
         return new Articulo(
-          json.id,
+         // json.id,
           json.nombre,
           json.precio,
           json.stock,
@@ -57,7 +57,7 @@ export class Articulo {
         this.precio = precio;
     }
 
-    getId(): number {
+    getId(): number | undefined {
         return this.id;
     }
 

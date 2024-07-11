@@ -8,6 +8,8 @@ import { CompraService } from '../../../Servicios/compra.service';
 import { Usuario } from '../../../Modelo/Usuario';
 import { FormGroup,FormControl,Validators } from '@angular/forms';
 
+import { Router, ActivatedRoute } from '@angular/router';
+
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -20,7 +22,7 @@ export class LoginComponent {
   user:Usuario;
   bandera:boolean;
 
-  constructor( private userservice:UsuarioService, private artservice:ArticuloService, private compraservice: CompraService){
+  constructor( private userservice:UsuarioService, private artservice:ArticuloService, private compraservice: CompraService,private router: Router, private route: ActivatedRoute){
     this.user=new Usuario("juan", "falso","1");
     this.bandera=false;
     
@@ -32,19 +34,47 @@ export class LoginComponent {
  }
 
   formulariodeusuario = new FormGroup({'nombre':new FormControl("",Validators.required),  
-    'contra':new FormControl("",Validators.required), 'email':new FormControl("",[Validators.required,Validators.email]) } )
+    'contra':new FormControl("",Validators.required) } )
 
     procesar () {
 
       console.log(this.formulariodeusuario.value)
-      this.user = new Usuario(this.formulariodeusuario.value.nombre!,this.formulariodeusuario.value.contra!,this.formulariodeusuario.value.email!);
+      this.user = new Usuario(this.formulariodeusuario.value.nombre!,this.formulariodeusuario.value.contra!,"nohacefaltaestecampoaca");
      // this.userservice.iniciarsesion(this.user).subscribe((user: Usuario) => {
        // console.log(user);})
-        
-
-      //alert(this.user)
+          //alert(this.user)
+      this.login()
       this.bandera=true;
       
     }
 
-}
+       
+    login(): void {
+      
+    
+    this.userservice.login(this.user.getNombre(),this.user.getContra()).subscribe(
+      (usuario) => {
+       console.log(usuario);
+       if (usuario!=undefined)
+        {  localStorage.setItem('username', this.user.getNombre());
+          localStorage.setItem('password', this.user.getContra());
+          
+          this.bandera=true;
+
+          alert ("wlecome"+ this.user.getNombre());
+        }
+      })
+      
+
+
+    
+      this.router.navigate(['/home']);
+
+      
+        }
+
+      
+  
+   
+
+  }

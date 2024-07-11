@@ -25,11 +25,13 @@ export class MisdatosComponent implements OnInit{
  
     if(localStorage.length>0)
     {
-      this.banderausuarioiniciado=true;
+      
       const nombre=localStorage.getItem('username')
       if(nombre!=null)
       {
          this.nombreusuario=nombre;
+         this.banderausuarioiniciado=true;
+         
       }
       else{
         this.nombreusuario="";
