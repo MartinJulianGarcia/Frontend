@@ -63,6 +63,8 @@ export class FormularioComponent {
         
         
         this.router.navigate(['/']);
+
+        //this.route.snapshot
       //alert(this.user)
     
       

@@ -16,6 +16,24 @@
 </ng-container>
 
 
-<app-formularioarticulo [hidden]="bandera"></app-formularioarticulo>
+<app-formularioarticulo [hidden]="bandera" ></app-formularioarticulo>
 
+<div>
+<ng-container *ngIf="devolucionarts && devolucionarts.length>0" >
+   <button style="margin-top:  10px; margin-bottom: 50px;"  (click)="actualizar2()" class="btn btn-outline btn-danger  btn-lg" id="eliminar"  > + Eliminar Articulo </button>
+   </ng-container>
+   </div>
+
+   <div class="mb-2">
+      <ng-container  >
+         <form (ngSubmit)="submit()" [hidden]="banderaeliminar">
+      <label class="form-label">
+         <strong>Nombre</strong> 
+      </label>
+      <input type="text" id="name" [(ngModel)]=" nombrealiminar" name="name" required placeholder="campera" >
+      <button type="submit">Eliminar</button>
+   </form>
+   </ng-container>
+   
+   </div>
 

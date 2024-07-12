@@ -20,7 +20,7 @@ import { HttpClient } from '@angular/common/http';
    // SidebarComponent
   ],
   imports: [
-    BrowserModule, CommonModule, HttpClient
+    BrowserModule, CommonModule
     
   ],
   providers: [],

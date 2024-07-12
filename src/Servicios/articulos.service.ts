@@ -67,6 +67,22 @@ export class ArticuloService {
   
     }
 
+    deletetArticulosHTTP(art:Articulo): Observable<Articulo> {
+      //alert( this.http.get<Articulo[]>(this.apiUrl).pipe(catchError(this.handleError)));
+    
+      const username = sessionStorage.getItem('username');
+      const password = sessionStorage.getItem('password');
+      
+      if (!username || !password) {
+        throw new Error('No authentication data found');
+      }
+      const headers = { 'Authorization': 'Basic ' + btoa(username + ":" + password)}
+      return this.http.delete<Articulo>(this.apiUrl + "/"+art.getNombre(), {headers}).pipe(catchError(this.handleError));
+       
+    
+      }
+    
+
 
   private handleError(error: HttpErrorResponse) {
     if (error.status === 401) {
