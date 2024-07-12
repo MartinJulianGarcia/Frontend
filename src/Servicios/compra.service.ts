@@ -48,8 +48,8 @@ AgregarCompra(c: Compra) : Observable<Compra> {
   
   getCompras(): Observable<Compra[]>{
    // alert(this.compras +"ver porque aca no aparecen");
-   const username = localStorage.getItem('username');
-   const password = localStorage.getItem('password');
+   const username = sessionStorage.getItem('username');
+   const password = sessionStorage.getItem('password');
    
    if (!username || !password) {
      throw new Error('No authentication data found');

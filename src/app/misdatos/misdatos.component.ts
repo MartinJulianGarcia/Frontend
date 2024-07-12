@@ -23,7 +23,7 @@ export class MisdatosComponent implements OnInit{
 
   ngOnInit(): void {
  
-    if(localStorage.length>0)
+    if(sessionStorage.length>0)
     {
       
       const nombre=sessionStorage.getItem('username')
@@ -46,6 +46,7 @@ Iniciardirecto(){
 }
 cerrarsesion(){
   sessionStorage.clear();
+  localStorage.clear();
   alert("se ha abandonado la sesion")
   this.banderausuarioiniciado=false
  
