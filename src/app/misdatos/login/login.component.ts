@@ -56,8 +56,8 @@ export class LoginComponent {
       (usuario) => {
        console.log(usuario);
        if (usuario!=undefined)
-        {  localStorage.setItem('username', this.user.getNombre());
-          localStorage.setItem('password', this.user.getContra());
+        {  sessionStorage.setItem('username', this.user.getNombre());
+          sessionStorage.setItem('password', this.user.getContra());
           
           this.bandera=true;
 

@@ -35,11 +35,16 @@ export class MiscomprasComponent implements OnInit, OnChanges{
   }
 
   ngOnInit(): void {
-      this.Compras=this.compraservice.getCompras()
-      if(localStorage.length>0)
+
+    this.compraservice.getCompras().subscribe((c) => {console.log(c); this.Compras=c});
+    console.log( this.Compras.length )
+
+
+      //this.Compras=this.compraservice.getCompras()
+      if(sessionStorage.length>0)
         {
           this.banderausuarioiniciado=true;
-          const nombre=localStorage.getItem('username')
+          const nombre=sessionStorage.getItem('username')
           if(nombre!=null)
           {
              this.nombredeusuario=nombre;
@@ -53,7 +58,7 @@ export class MiscomprasComponent implements OnInit, OnChanges{
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.Compras=this.compraservice.getCompras()
+  //  this.Compras=this.compraservice.getCompras()
    // alert(this.userservice.getCompras());
   }
 

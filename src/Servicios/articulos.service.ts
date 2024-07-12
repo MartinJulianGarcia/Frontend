@@ -44,7 +44,7 @@ export class ArticuloService {
   getArticulosHTTP(): Observable<Articulo[]> {
   //alert( this.http.get<Articulo[]>(this.apiUrl).pipe(catchError(this.handleError)));
 
-  
+
   return this.http.get<Articulo[]>(this.apiUrl).pipe(map(data => data.map(item => Articulo.fromJson(item))),catchError(this.handleError));
    
 
@@ -54,8 +54,8 @@ export class ArticuloService {
     //alert( this.http.get<Articulo[]>(this.apiUrl).pipe(catchError(this.handleError)));
   
     //return this.http.post<Articulo>(this.apiUrl, art).pipe(catchError(this.handleError));   ESTE SIN AUTH FUNCIONA OK
-    const username = localStorage.getItem('username');
-    const password = localStorage.getItem('password');
+    const username = sessionStorage.getItem('username');
+    const password = sessionStorage.getItem('password');
     
     if (!username || !password) {
       throw new Error('No authentication data found');

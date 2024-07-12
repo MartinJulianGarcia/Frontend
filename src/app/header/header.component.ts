@@ -24,10 +24,10 @@ export class HeaderComponent {
 
   ngOnInit(): void {
   
-    if(localStorage.length>0)
+    if(sessionStorage.length>0)
       {
         this.banderausuarioiniciado=true;
-        const nombre=localStorage.getItem('username')
+        const nombre=sessionStorage.getItem('username')
         if(nombre!=null)
         {
            this.nombredeusuario=nombre;
@@ -40,7 +40,7 @@ export class HeaderComponent {
    
 }
 cerrarsesion(){
-  localStorage.clear();
+  sessionStorage.clear();
   alert("se ha abandonado la sesion")
   this.banderausuarioiniciado=false
   this.cdr.detectChanges();
@@ -48,10 +48,10 @@ cerrarsesion(){
 
 chequeosesion() 
 {
-  if(localStorage.length>0)
+  if(sessionStorage.length>0)
     {
       this.banderausuarioiniciado=true;
-      const nombre=localStorage.getItem('username')
+      const nombre=sessionStorage.getItem('username')
       if(nombre!=null)
       {
          this.nombredeusuario=nombre;

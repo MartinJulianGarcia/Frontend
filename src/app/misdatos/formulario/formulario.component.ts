@@ -38,8 +38,8 @@ export class FormularioComponent {
   return this.formulariodeusuario.get('nombre')  as FormControl;   // esto es par ano tener que escribir tdo en cada vez pero no lo uso 
  }
 
-  formulariodeusuario = new FormGroup({'nombre':new FormControl("",Validators.required),  
-    'contra':new FormControl("",Validators.required), 'email':new FormControl("",[Validators.required,Validators.email]) } )
+  formulariodeusuario = new FormGroup({'nombre':new FormControl("",[Validators.required,Validators.minLength(4),Validators.maxLength(10)]),  
+    'contra':new FormControl("",[Validators.required,Validators.minLength(4),Validators.maxLength(10)]), 'email':new FormControl("",[Validators.required,Validators.email]) } )
 
     procesar () {
 
@@ -48,12 +48,12 @@ export class FormularioComponent {
       this.userservice.RegistrarUsuario(this.user).subscribe((user: Usuario) => {
         console.log(user);
         if (user!=undefined)
-        {  localStorage.setItem('username', this.user.getNombre());
-          localStorage.setItem('password', this.user.getContra());
+        {  sessionStorage.setItem('username', this.user.getNombre());
+          sessionStorage.setItem('password', this.user.getContra());
           
           this.bandera=true;
 
-          alert ("wlecome"+ this.user.getNombre());
+          alert ("welcome "+ this.user.getNombre());
         }
         else{
           this.bandera=false;

@@ -48,9 +48,9 @@ export class FormulariodecompraComponent {
 
     procesar () {
 
-       this.username=localStorage.getItem("username")
+       this.username=sessionStorage.getItem("username")
 
-      if(localStorage.length>0 && this.username!=null){
+      if(sessionStorage.length>0 && this.username!=null){
 
         
       console.log(this.formulariodecompra.value)

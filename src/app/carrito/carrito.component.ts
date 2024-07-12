@@ -79,7 +79,7 @@ export class CarritoComponent implements OnInit {
    
   comprar() : void {
 
-    if(localStorage.length>0)
+    if(sessionStorage.length>0)
       {
         this.bandera=true;
       }

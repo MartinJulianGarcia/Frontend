@@ -26,7 +26,7 @@ export class MisdatosComponent implements OnInit{
     if(localStorage.length>0)
     {
       
-      const nombre=localStorage.getItem('username')
+      const nombre=sessionStorage.getItem('username')
       if(nombre!=null)
       {
          this.nombreusuario=nombre;
@@ -45,7 +45,7 @@ Iniciardirecto(){
  
 }
 cerrarsesion(){
-  localStorage.clear();
+  sessionStorage.clear();
   alert("se ha abandonado la sesion")
   this.banderausuarioiniciado=false
  

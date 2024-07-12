@@ -70,8 +70,8 @@ export class UsuarioService {
 
   GetUsuario() :String {
    
-    const username = localStorage.getItem('username');
-    const password = localStorage.getItem('password');
+    const username = sessionStorage.getItem('username');
+    const password = sessionStorage.getItem('password');
     if(username!=null)
     {
       return username;
@@ -88,7 +88,7 @@ export class UsuarioService {
    
     this.usuario=new Usuario(u.getNombre(),u.getContra(),u.getEmail(),[]);
 
-    localStorage.setItem('user', btoa(u.getNombre() + ":" + u.getContra()));
+    sessionStorage.setItem('user', btoa(u.getNombre() + ":" + u.getContra()));
   
      
     return this.http.post<Usuario>(this.apiUrl , u).pipe(catchError(this.handleError));

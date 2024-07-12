@@ -8,6 +8,7 @@ export class Compra {
     private importe: number;
     private articulos: Array<Articulo>;
     private nombreusuario:String;
+    
 
     // los nombres deben ser los mismos que tienen en el backend, no importa tanto el orden pero si que sea el mismo nombre
 
@@ -24,6 +25,21 @@ export class Compra {
 
         //compras= new ArrayList<>();
     }
+
+    static fromJson(json: any, c:Compra | undefined): Compra {
+        
+        c= new Compra(
+          
+          
+          json.importe,
+          json.nombredeusuario,
+          json.articulos
+          
+        );
+     c.setId(json.id);
+     return c;
+
+      }
 
 
     // Métodos getter y setter para acceder a los atributos privados

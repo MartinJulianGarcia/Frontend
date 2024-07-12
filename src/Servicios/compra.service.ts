@@ -19,6 +19,7 @@ export class CompraService {
 
   compras:Array<Compra>=[]
   apiUrl: string = "http://localhost:8081/api/Compra";
+  compraqueviene:Compra | undefined;
 
   constructor(usuarioservice: UsuarioService, private http: HttpClient) { 
 
@@ -33,8 +34,8 @@ AgregarCompra(c: Compra) : Observable<Compra> {
    // this.compras.push(c);
     //alert("se agrego una nueva compra al usuario"+ c.getImporte());
     //alert(this.compras);
-    const username = localStorage.getItem('username');
-    const password = localStorage.getItem('password');
+    const username = sessionStorage.getItem('username');
+    const password = sessionStorage.getItem('password');
     
     if (!username || !password) {
       throw new Error('No authentication data found');
@@ -45,10 +46,21 @@ AgregarCompra(c: Compra) : Observable<Compra> {
 
   }
   
-  getCompras(): Array<Compra> {
+  getCompras(): Observable<Compra[]>{
    // alert(this.compras +"ver porque aca no aparecen");
-    return this.compras;
+   const username = localStorage.getItem('username');
+   const password = localStorage.getItem('password');
+   
+   if (!username || !password) {
+     throw new Error('No authentication data found');
+   }
+   const headers = { 'Authorization': 'Basic ' + btoa(username + ":" + password)}
+
+   return this.http.get<Compra[]>(this.apiUrl +"/usuario/"+username, {headers}).pipe(map(data => data.map(item => Compra.fromJson(item,this.compraqueviene))),catchError(this.handleError));
+
+   
   }
+
 
   private handleError(error: HttpErrorResponse) {
 

@@ -72,23 +72,21 @@ get nombre () {
    procesar () {
 
      console.log(this.formulariodearticulo.value)
-     if(Number(this.formulariodearticulo.value.precio!)==0)
-      {
-        this.art= new Articulo(this.formulariodearticulo.value.nombre!,Number(this.formulariodearticulo.value.stock!),99999,this.formulariodearticulo.value.temporada!,"remera");
-      }
+   
      this.art= new Articulo(this.formulariodearticulo.value.nombre!,Number(this.formulariodearticulo.value.precio!),Number(this.formulariodearticulo.value.stock!),this.formulariodearticulo.value.temporada!,this.formulariodearticulo.value.tipo!);
-     this.username = localStorage.getItem('username');
+     this.username = sessionStorage.getItem('username');
      if (this.username!=null){
     
      this.artservice.PostArticulosHTTP(this.art).subscribe((artquevino: Articulo) => {console.log(artquevino)})
+     alert("articulo agregado")
      }
      else {
       alert("debe estar logueado para generar un articulo");
      }
     
        //console.log(this.art);
-       alert("articulo agregado")
-       this.router.navigate(['/miscompras']);
+       
+       this.router.navigate(['/misdatos']);
       
      //alert(this.user)
    // this.bandera=true;
