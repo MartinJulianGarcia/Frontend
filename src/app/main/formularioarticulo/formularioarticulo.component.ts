@@ -9,7 +9,7 @@ import { CompraService } from '../../../Servicios/compra.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Articulo } from '../../../Modelo/Articulo';
 import { NgFor, NgIf } from '@angular/common';
-
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-formularioarticulo',
@@ -32,7 +32,7 @@ export class FormularioarticuloComponent {
  selectedValue2:String;
  username:String | null
 
- constructor( private userservice:UsuarioService, private artservice:ArticuloService, private compraservice: CompraService, private router: Router, private route: ActivatedRoute){
+ constructor( private userservice:UsuarioService, private artservice:ArticuloService, private compraservice: CompraService, private router: Router, private route: ActivatedRoute, private cdr: ChangeDetectorRef){
    this.user=new Usuario("juan", "falso","1");
    this.bandera=false;
    this.art=new Articulo("art",500,20,"verano","pantalon")
@@ -79,6 +79,8 @@ get nombre () {
     
      this.artservice.PostArticulosHTTP(this.art).subscribe((artquevino: Articulo) => {console.log(artquevino)})
      alert("articulo agregado")
+     this.cdr.detectChanges();
+     this.cdr.markForCheck();
      }
      else {
       alert("debe estar logueado para generar un articulo");
@@ -86,7 +88,7 @@ get nombre () {
     
        //console.log(this.art);
        
-       this.router.navigate(['/misdatos']);
+      // this.router.navigate(['/misdatos']);
       
      //alert(this.user)
    // this.bandera=true;

@@ -14,6 +14,7 @@ export class ArticuloService {
   Articulos : Array<Articulo>
   carrito :   Array<Articulo>
   filtro="todos";
+  Articulosactualizados:Array<Articulo>
 
   apiUrl: string = "http://localhost:8081/api/Articulo";
  // private filtroSubject = new BehaviorSubject<string>('todos');
@@ -29,7 +30,7 @@ export class ArticuloService {
 
     this.Articulos = [art1, art2, art3]
     this.carrito=[];
-
+    this.Articulosactualizados=[];
     //alert(`CarritoService instance count: ${ArticuloService.instanceCount}`);
    }
   
@@ -142,6 +143,11 @@ export class ArticuloService {
       }
     
    // localStorage.setItem('carrito', JSON.stringify(this.carrito));
+  }
+
+  actualizar (art:Articulo[]):  Array<Articulo> {
+    this.Articulosactualizados= art;
+    return art;
   }
 
 

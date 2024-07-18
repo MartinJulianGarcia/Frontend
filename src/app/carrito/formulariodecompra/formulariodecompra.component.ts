@@ -43,8 +43,8 @@ export class FormulariodecompraComponent {
  
    }
 
-   formulariodecompra = new FormGroup({'tarjeta':new FormControl("",[Validators.required,Validators.minLength(10), Validators.pattern('^[0-9]+$')]),  
-    'direccion':new FormControl("",Validators.required), 'email':new FormControl("",[Validators.required,Validators.email]) } )
+   formulariodecompra = new FormGroup({'tarjeta':new FormControl("",[Validators.required,Validators.minLength(12),Validators.required,Validators.maxLength(12), Validators.pattern('^[0-9]+$')]),  
+    'direccion':new FormControl("",[Validators.required,Validators.minLength(1),Validators.required]), 'email':new FormControl("",[Validators.required,Validators.email]) } )
 
     procesar () {
 

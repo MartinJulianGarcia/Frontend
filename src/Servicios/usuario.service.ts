@@ -83,10 +83,12 @@ export class UsuarioService {
   }
 
 
-  RegistrarUsuario(u:Usuario) : Observable<Usuario>
+  RegistrarUsuario(u:Usuario, a: boolean) : Observable<Usuario>
   {
-   
-    this.usuario=new Usuario(u.getNombre(),u.getContra(),u.getEmail(),[]);
+
+    if (a==false)
+    {
+      this.usuario=new Usuario(u.getNombre(),u.getContra(),u.getEmail(),[]);
 
     sessionStorage.setItem('user', btoa(u.getNombre() + ":" + u.getContra()));
   
@@ -94,6 +96,21 @@ export class UsuarioService {
     return this.http.post<Usuario>(this.apiUrl , u).pipe(catchError(this.handleError));
 
     alert("terminoperonosabemosquepaso");
+    }
+    else
+    {
+      this.usuario=new Usuario(u.getNombre(),u.getContra(),u.getEmail(),[]);
+
+    sessionStorage.setItem('user', btoa(u.getNombre() + ":" + u.getContra()));
+  
+     
+    return this.http.post<Usuario>(this.apiUrl +"/Admin" , u).pipe(catchError(this.handleError));
+
+    alert("terminoperonosabemosquepaso");
+
+    }
+   
+    
     
   }
 

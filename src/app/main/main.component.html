@@ -11,21 +11,21 @@
 
  </ng-container>
 </div>
-<ng-container >
+<ng-container *ngIf="UsuarioAdmin">
 <button style="margin-top:  10px; margin-bottom: 50px;"  (click)="actualizar()" class="btn btn-outline-success btn-lg" id="comprar"  > + Agregar Articulo </button>
 </ng-container>
 
 
-<app-formularioarticulo [hidden]="bandera" ></app-formularioarticulo>
+<app-formularioarticulo [hidden]="bandera || !UsuarioAdmin" ></app-formularioarticulo>
 
 <div>
-<ng-container *ngIf="devolucionarts && devolucionarts.length>0" >
-   <button style="margin-top:  10px; margin-bottom: 50px;"  (click)="actualizar2()" class="btn btn-outline btn-danger  btn-lg" id="eliminar"  > + Eliminar Articulo </button>
+<ng-container *ngIf="devolucionarts && devolucionarts.length>0 && UsuarioAdmin" >
+   <button style="margin-top:  10px; margin-bottom: 50px;"  (click)="actualizar2()" class="btn btn-outline btn-danger  btn-lg" id="eliminar"  > - Eliminar Articulo </button>
    </ng-container>
    </div>
 
    <div class="mb-2">
-      <ng-container  >
+      <ng-container  *ngIf="UsuarioAdmin">
          <form (ngSubmit)="submit()" [hidden]="banderaeliminar">
       <label class="form-label">
          <strong>Nombre</strong> 

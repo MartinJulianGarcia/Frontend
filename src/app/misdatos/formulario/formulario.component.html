@@ -22,9 +22,22 @@
                 La contraseña es obligatorio
             </div>
         </div>
+
+        <div class="mb-2">
+            <label class="form-label">
+                <br>
+               Tipo de Usuario 
+            </label>
+          
+        </div>
+        
+        <div *ngFor="let item of items">
+            <input type="radio" [value]="item.value" formControlName="Admin" [(ngModel)]="selectedValue">{{ item.display }}
+          </div>
         
         
         <div class="mb-2">
+            <br>
             <label class="form-label">
                 Email
             </label>

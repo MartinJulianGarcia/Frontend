@@ -1,16 +1,19 @@
 <div [hidden]="bandera2">
-    Ingrese sus datos para terminar la compra
+    Ingrese sus datos para terminar la compra <br>
 
 <div class="card">
     <div class="card-body" [hidden]="bandera2"  >
-        <strong> Por favor Ingrese sus datos:</strong> <br>
+        <strong> Por favor Ingrese sus datos</strong> <br>
         <form action="" style="padding-top: 10px;" [formGroup]="formulariodecompra" (ngSubmit)="procesar()">
             <div class="mb-2">
             <label class="form-label">
-                Direccion
+                Direccion de envio
             </label>
             <input type="text" class="form-control" formControlName="direccion" placeholder="por favor ingrese su direccion de envio" >
-           
+            <div class="alert alert-danger mt-2" [hidden]="formulariodecompra.get('direccion')?.valid || formulariodecompra.get('direccion')?.pristine" >   <!-- [hidden]="nombre.valid || nombre.pristine" -->
+              
+                La direccion es obligatorio
+            </div>
         </div>
 
         <div class="mb-2">
@@ -18,7 +21,10 @@
                 Tarjeta
             </label>
             <input type="text" formControlName="tarjeta" class="form-control" placeholder="por favor ingrese su tarjeta"  >
-            
+            <div class="alert alert-danger mt-2" [hidden]="formulariodecompra.get('tarjeta')?.valid || formulariodecompra.get('tarjeta')?.pristine" >   <!-- [hidden]="nombre.valid || nombre.pristine" -->
+              
+                La tarjeta es obligatorio, debe contener 12 caracteres
+            </div>
         </div>
         
         
@@ -27,7 +33,10 @@
                 Email
             </label>
             <input type="email" formControlName="email" class="form-control" placeholder="por favor ingrese su email">
-          
+            <div class="alert alert-danger mt-2" [hidden]="formulariodecompra.get('email')?.valid || formulariodecompra.get('email')?.pristine" >   <!-- [hidden]="nombre.valid || nombre.pristine" -->
+              
+                El mail es obligatorio
+            </div>
         </div>
         <button class="btn btn-primary" [disabled]="formulariodecompra.invalid"> Finalizar Compra </button>
     </form>

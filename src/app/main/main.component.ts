@@ -9,6 +9,7 @@ import { FormularioarticuloComponent } from './formularioarticulo/formularioarti
 import { FormControl, FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ChangeDetectorRef } from '@angular/core';
 
 
 
@@ -20,7 +21,7 @@ import { Router } from '@angular/router';
   styleUrl: './main.component.css'
 })
 
-export class MainComponent implements OnInit {
+export class MainComponent implements OnInit ,OnChanges{
 
   Articulos: Array<Articulo>=[]
   devolucionarts: Array<Articulo>=[];
@@ -32,9 +33,11 @@ export class MainComponent implements OnInit {
   nombrealiminar=''
   banderanoexiste=true;
 
+  UsuarioAdmin=false;
+
   
 
-  constructor( private ArtService:ArticuloService, private router: Router) { 
+  constructor( private ArtService:ArticuloService, private router: Router, private cdr: ChangeDetectorRef) { 
     
     
     
@@ -56,9 +59,28 @@ export class MainComponent implements OnInit {
     //alert(this.ArtService.getfiltro());
     this.filtro=this.ArtService.getfiltro()
 
+    if (sessionStorage.getItem('Rango')=="Administrador")
+    {
+      this.UsuarioAdmin=true;
+    }
+    else{
+      this.UsuarioAdmin=false;
+    }
+
+   // this.devolucionarts=this.ArtService.actualizar(this.devolucionarts); incluso aunque llame al service no actualiza el front
+
     //this.Articulos=this.devolucionarts.filter(Articulo => Articulo.getTipo() == "remera");
    
    
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    
+    this.ArtService.getArticulosHTTP().subscribe((art) => {console.log(art); this.devolucionarts=art; console.log( art.length)});
+    console.log("algo hace pero no devuelve datos: "+ this.devolucionarts.length )
+
+    //alert(this.ArtService.getfiltro());
+    this.filtro=this.ArtService.getfiltro()
   }
 
   actualizar(): void {
@@ -108,8 +130,9 @@ export class MainComponent implements OnInit {
        alert( element.getNombre() + " fue eliminado")
        this.banderanoexiste=false;
        this.ArtService.deletetArticulosHTTP(element).subscribe((art) => {console.log(art);});
-       this.router.navigate(['/misdatos']);
-       
+       //this.router.navigate(['/misdatos']);
+       this.cdr?.detectChanges();
+       this.cdr.markForCheck();
       }
      
       
