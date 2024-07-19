@@ -25,6 +25,8 @@ export const routes: Routes = [
         { path: "section-b", component: FormulariodecompraComponent},
       ]
     },
+    { path: 'footer', component: FooterComponent},
+   
     { path: '**', redirectTo: ''}
   
 

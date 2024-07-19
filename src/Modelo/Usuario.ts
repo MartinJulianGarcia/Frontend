@@ -19,6 +19,19 @@ export class Usuario {
 
     }
 
+    static fromJson(json: any): void {
+        
+        const isAdmin = json.authorities.some((auth: any) => auth.authority === 'ADMIN');
+  
+        if (isAdmin) {
+          sessionStorage.setItem('Rango', 'Administrador');
+        } else {
+          sessionStorage.setItem('Rango', 'Cliente');
+        }
+        
+
+      }
+
     // Métodos getter y setter para acceder a los atributos privados
 
     getNombre(): string {

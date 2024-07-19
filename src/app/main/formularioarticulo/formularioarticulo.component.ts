@@ -85,6 +85,7 @@ get nombre () {
      else {
       alert("debe estar logueado para generar un articulo");
      }
+     this.refrescarPagina();
     
        //console.log(this.art);
        
@@ -94,5 +95,16 @@ get nombre () {
    // this.bandera=true;
      
    }
+
+     // alert('el evento si funciona pero no se actualiza la vista')
+  refrescarPagina() {
+    const rutaActual = this.router.url;
+    
+
+    // Navegar a una ruta temporal y luego volver a la ruta original
+    this.router.navigateByUrl("/footer").then(() => {
+      setTimeout(() => this.router.navigateByUrl(rutaActual), 100);
+    });
+  }
 
 }

@@ -9,6 +9,9 @@ import { Observable } from 'rxjs';
 import { ObservableInput,throwError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { catchError, map } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -118,9 +121,14 @@ export class UsuarioService {
 
     const headers = { 'Authorization': 'Basic ' + btoa(username + ":" + password)}
 
-    return this.http.get<Usuario>(this.apiUrl + "/username/"+username, {headers}).pipe(catchError(this.handleErrorlogin))
+    return this.http.get<Usuario>(this.apiUrl + "/username/"+username, {headers}).pipe(tap((item => Usuario.fromJson(item))),catchError(this.handleErrorlogin))
     
     
+  }
+
+  verpermisos(){
+
+
   }
 
 
@@ -181,12 +189,12 @@ export class UsuarioService {
       
       // Error del lado del cliente o de la red
       errorMessage = `Error: ${error.error.message}`;
-      alert("entro en error del primer print");
+      alert("hay un error al intentar loguearse");
     } else {
       // Error del lado del servidor
       
       errorMessage = `Error: ${error.status}\nMessage: ${error.message}`;
-      alert("El usuario ya existe");
+      alert("El usuario no esta registrado");
     }
    
 

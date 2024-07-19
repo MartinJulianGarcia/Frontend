@@ -58,6 +58,7 @@ export class LoginComponent {
        if (usuario!=undefined)
         {  sessionStorage.setItem('username', this.user.getNombre());
           sessionStorage.setItem('password', this.user.getContra());
+         // sessionStorage.setItem('Rango', usuario());
           
           this.bandera=true;
 
@@ -68,9 +69,19 @@ export class LoginComponent {
 
 
     
-      this.router.navigate(['/home']);
+      this.refrescarPagina();
 
       
+        }
+
+        refrescarPagina() {
+          const rutaActual = this.router.url;
+          
+        
+          // Navegar a una ruta temporal y luego volver a la ruta original
+          this.router.navigateByUrl("/footer").then(() => {
+            setTimeout(() => this.router.navigateByUrl("*"), 150);
+          });
         }
 
       

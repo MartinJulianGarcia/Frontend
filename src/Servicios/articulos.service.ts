@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { catchError } from 'rxjs';
 import { HttpErrorResponse,HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs';
+import {  EventEmitter } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,9 @@ export class ArticuloService {
   carrito :   Array<Articulo>
   filtro="todos";
   Articulosactualizados:Array<Articulo>
+  private articulosSubject = new BehaviorSubject<any[]>([]);
+  articulos$ = this.articulosSubject.asObservable();
+
 
   apiUrl: string = "http://localhost:8081/api/Articulo";
  // private filtroSubject = new BehaviorSubject<string>('todos');
@@ -45,7 +49,7 @@ export class ArticuloService {
   getArticulosHTTP(): Observable<Articulo[]> {
   //alert( this.http.get<Articulo[]>(this.apiUrl).pipe(catchError(this.handleError)));
 
-
+  
   return this.http.get<Articulo[]>(this.apiUrl).pipe(map(data => data.map(item => Articulo.fromJson(item))),catchError(this.handleError));
    
 
@@ -115,6 +119,8 @@ export class ArticuloService {
 
   getArticulosfiltrados(): Array<Articulo> {
 
+
+
     
     if (this.filtro=="todos")
     {
@@ -122,8 +128,10 @@ export class ArticuloService {
     }
   else
     {
-    return this.Articulos.filter(Articulo => Articulo.getTipo() == this.filtro);
+      this.Articulosactualizados= this.Articulos.filter(Articulo => Articulo.getTipo() == this.filtro || Articulo.getTemporada() == this.filtro )
+    return this.Articulosactualizados;
     }
+    
     
     
   }
@@ -164,6 +172,7 @@ export class ArticuloService {
   {
     alert("se cambio el filtro");
     this.filtro=filtro;
+   // this.articulosSubject.next(this.Articulosactualizados);
   }
 
   getfiltro( ): string

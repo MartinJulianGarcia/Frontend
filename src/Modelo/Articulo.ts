@@ -18,6 +18,7 @@ export class Articulo {
         this.temporada = temporada;
 
         this.comprasconesteart= comprasconesteart;
+        
     }
 
     static fromJson(json: any): Articulo {

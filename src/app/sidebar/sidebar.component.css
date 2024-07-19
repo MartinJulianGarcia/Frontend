@@ -12,5 +12,11 @@
   .custom-cursor:hover {
     cursor: pointer;
   }
+
+
+  .highlight {
+    font-weight: bold; /* O el estilo que desees para el texto resaltado */
+    color: rgb(146, 52, 132); /* Ejemplo de color para el resaltado */
+  }
   
   

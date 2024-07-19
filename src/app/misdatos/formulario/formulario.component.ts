@@ -81,12 +81,22 @@ export class FormularioComponent {
 
         
         
-        this.router.navigate(['/']);
+        this.refrescarPagina();
 
         //this.route.snapshot
       //alert(this.user)
     
       
+    }
+
+    refrescarPagina() {
+      const rutaActual = this.router.url;
+      const rutaTemporal = '/ruta-temporal';
+  
+      // Navegar a una ruta temporal y luego volver a la ruta original
+      this.router.navigateByUrl("/footer").then(() => {
+        setTimeout(() => this.router.navigateByUrl(rutaActual), 100);
+      });
     }
 
 }

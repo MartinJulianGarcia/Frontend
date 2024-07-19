@@ -47,6 +47,12 @@ export class MainComponent implements OnInit ,OnChanges{
 
   //  this.Articulos = []
    // this.devolucionarts=[];
+   this.cdr.markForCheck();
+
+   this.ArtService.articulos$.subscribe(articulos => {
+    this.Articulos = articulos;
+  });
+  
 
   }
 
@@ -54,7 +60,7 @@ export class MainComponent implements OnInit ,OnChanges{
    //this.Articulos = this.ArtService.getArticulosfiltrados()
     //this.Articulos= this.ArtService.getArticulosHTTP()
     this.ArtService.getArticulosHTTP().subscribe((art) => {console.log(art); this.devolucionarts=art; console.log( art.length)});
-    console.log("algo hace pero no devuelve datos: "+ this.devolucionarts.length )
+    console.log( this.devolucionarts.length )
 
     //alert(this.ArtService.getfiltro());
     this.filtro=this.ArtService.getfiltro()
@@ -66,6 +72,10 @@ export class MainComponent implements OnInit ,OnChanges{
     else{
       this.UsuarioAdmin=false;
     }
+   
+    this.cdr.detectChanges();
+    
+    
 
    // this.devolucionarts=this.ArtService.actualizar(this.devolucionarts); incluso aunque llame al service no actualiza el front
 
@@ -77,10 +87,13 @@ export class MainComponent implements OnInit ,OnChanges{
   ngOnChanges(changes: SimpleChanges): void {
     
     this.ArtService.getArticulosHTTP().subscribe((art) => {console.log(art); this.devolucionarts=art; console.log( art.length)});
-    console.log("algo hace pero no devuelve datos: "+ this.devolucionarts.length )
+    console.log( this.devolucionarts.length )
 
     //alert(this.ArtService.getfiltro());
     this.filtro=this.ArtService.getfiltro()
+  
+    this.cdr.detectChanges();
+    
   }
 
   actualizar(): void {
@@ -97,7 +110,15 @@ export class MainComponent implements OnInit ,OnChanges{
 
    //this.Articulos = this.ArtService.getArticulosfiltrados();
   // alert('el evento si funciona pero no se actualiza la vista')
+  refrescarPagina() {
+    const rutaActual = this.router.url;
+    const rutaTemporal = '/ruta-temporal';
 
+    // Navegar a una ruta temporal y luego volver a la ruta original
+    this.router.navigateByUrl("/footer").then(() => {
+      setTimeout(() => this.router.navigateByUrl(rutaActual), 100);
+    });
+  }
   
   
   actualizar2(): void {
@@ -133,6 +154,7 @@ export class MainComponent implements OnInit ,OnChanges{
        //this.router.navigate(['/misdatos']);
        this.cdr?.detectChanges();
        this.cdr.markForCheck();
+       this.refrescarPagina();
       }
      
       
@@ -143,6 +165,8 @@ export class MainComponent implements OnInit ,OnChanges{
           alert("el nombre ingresado no corresponde a un articulo")
         }
         this.banderanoexiste=false;
+
+        this.refrescarPagina();
 
     }
 
