@@ -38,3 +38,27 @@
    
    </div>
 
+   
+
+   <div>
+   <ng-container *ngIf="devolucionarts && devolucionarts.length>0 && UsuarioAdmin" >
+      <button style="margin-top:  10px; margin-bottom: 50px;"  (click)="actualizar3()" class="btn btn-outline btn-info  btn-lg" id="editar"  > ~ Editar Articulo </button>
+      </ng-container>
+      </div>
+   
+      <div class="mb-2">
+         <ng-container  *ngIf="UsuarioAdmin">
+            <form (ngSubmit)="submitedit()" [hidden]="banderaeditar">
+         <label class="form-label">
+            <strong>Nombre</strong> 
+         </label>
+         <input type="text" id="name" [(ngModel)]=" nombreaeditar" name="name" required placeholder="campera" >
+         <button type="submit2">Editar</button>
+      </form>
+      </ng-container>
+
+      <ng-container  *ngIf="UsuarioAdmin && !banderaeditarformulario">
+      <app-formulario-edit [Articulo]="Articuloapasar" > </app-formulario-edit>
+      </ng-container>
+      
+      </div>

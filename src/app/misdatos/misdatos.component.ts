@@ -6,6 +6,8 @@ import { RouterOutlet } from '@angular/router';
 import { RouterModule } from '@angular/router';
 import { routes } from '../app.routes';
 import { LoginComponent } from './login/login.component';
+import { Router, ActivatedRoute } from '@angular/router';
+
 
 @Component({
   selector: 'app-misdatos',
@@ -19,6 +21,11 @@ export class MisdatosComponent implements OnInit{
   banderausuarioiniciado=false;
   yaregistrado=false;
   nombreusuario: String="";
+
+
+  constructor(private router: Router, private route: ActivatedRoute){
+
+  }
 
 
   ngOnInit(): void {
@@ -41,7 +48,9 @@ export class MisdatosComponent implements OnInit{
 }
 
 Iniciardirecto(){
+  if(this.yaregistrado==false)
   this.yaregistrado=true;
+  else{this.yaregistrado=false; this.router.navigateByUrl("/misdatos")}
  
 }
 cerrarsesion(){

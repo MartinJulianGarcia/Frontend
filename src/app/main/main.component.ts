@@ -10,13 +10,14 @@ import { FormControl, FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ChangeDetectorRef } from '@angular/core';
+import { FormularioEditComponent } from './formulario-edit/formulario-edit.component';
 
 
 
 @Component({
   selector: 'app-main',
   standalone: true,
-  imports: [NgFor,NgIf,ArticuloComponent, FormularioarticuloComponent, FormsModule,ReactiveFormsModule],   // como son Standalone, debo importar los modulos y no usar un app.module.ts
+  imports: [NgFor, NgIf, ArticuloComponent, FormularioarticuloComponent, FormsModule, ReactiveFormsModule, FormularioEditComponent],   // como son Standalone, debo importar los modulos y no usar un app.module.ts
   templateUrl: './main.component.html',
   styleUrl: './main.component.css'
 })
@@ -25,10 +26,16 @@ export class MainComponent implements OnInit ,OnChanges{
 
   Articulos: Array<Articulo>=[]
   devolucionarts: Array<Articulo>=[];
+  Articuloapasar: Articulo | undefined;
+
   errorMessage:string | undefined;
   filtro="todos";
   bandera=true;
   banderaeliminar=true;
+
+  banderaeditar=true;
+  banderaeditarformulario=true;
+  nombreaeditar=''
  
   nombrealiminar=''
   banderanoexiste=true;
@@ -51,6 +58,7 @@ export class MainComponent implements OnInit ,OnChanges{
 
    this.ArtService.articulos$.subscribe(articulos => {
     this.Articulos = articulos;
+    
   });
   
 
@@ -98,10 +106,14 @@ export class MainComponent implements OnInit ,OnChanges{
 
   actualizar(): void {
 
-    if (sessionStorage.length>0)
+    if (sessionStorage.length>0 && this.bandera==true)
       {
-    this.bandera=false;
-     }
+        this.bandera=false;
+      }
+      else if(sessionStorage.length>0 && this.bandera==false)
+      {
+        this.bandera=true;
+      }
     else {
       alert("debe estar logueado para agregar articulos");
       this.router.navigate(['/misdatos']);
@@ -123,12 +135,30 @@ export class MainComponent implements OnInit ,OnChanges{
   
   actualizar2(): void {
 
-    if (sessionStorage.length>0)
+    if (sessionStorage.length>0 && this.banderaeliminar==true)
     {
       this.banderaeliminar=false;
     }
+    else if(sessionStorage.length>0 && this.banderaeliminar==false)
+    {
+      this.banderaeliminar=true;
+    }
     else{ alert("debe estar logueado para eliminar articulos"); this.router.navigate(['/misdatos']);}
-    
+   }
+
+
+    actualizar3(): void {
+
+      if (sessionStorage.length>0 && this.banderaeditar==true)
+        {
+          this.banderaeditar=false;
+        }
+        else if(sessionStorage.length>0 && this.banderaeditar==false)
+        {
+          this.banderaeditar=true;
+        }
+        else{ alert("debe estar logueado para eliminar articulos"); this.router.navigate(['/misdatos']);}
+    }
 
    // this.devolucionarts.forEach(element => { 
      // if(this.nombrealiminar!=null && this.nombrealiminar.name==element.getNombre())
@@ -140,7 +170,7 @@ export class MainComponent implements OnInit ,OnChanges{
 
      
      // })
-    }
+    
     submit(): void{
 
      // alert (this.nombrealiminar)
@@ -164,11 +194,43 @@ export class MainComponent implements OnInit ,OnChanges{
         {
           alert("el nombre ingresado no corresponde a un articulo")
         }
-        this.banderanoexiste=false;
+        this.banderanoexiste=true;
 
-        this.refrescarPagina();
+       // this.refrescarPagina();
 
     }
+
+
+    submitedit(): void{
+
+      // alert (this.nombrealiminar)
+       
+     this.devolucionarts.forEach(element => { 
+       if(this.nombreaeditar!=null && this.nombreaeditar==element.getNombre())
+      {
+        alert( element.getNombre() + " se puede editar en cantidad y stock, complete los campos")
+        this.banderanoexiste=false;
+        this.banderaeditarformulario=false;
+        this.Articuloapasar=element;
+       // this.ArtService.deletetArticulosHTTP(element).subscribe((art) => {console.log(art);});
+        //this.router.navigate(['/misdatos']);
+      // this.cdr?.detectChanges();
+      //  this.cdr.markForCheck();
+        //this.refrescarPagina();
+       }
+      
+       
+      
+       })
+       if (this.banderanoexiste==true)
+         {
+           alert("el nombre ingresado no corresponde a un articulo")
+         }
+         this.banderanoexiste=true;
+ 
+       //  this.refrescarPagina();
+ 
+     }
 
 
     

@@ -72,6 +72,23 @@ export class ArticuloService {
   
     }
 
+    PutArticulosHTTP(art:Articulo): Observable<Articulo> {
+      //alert( this.http.get<Articulo[]>(this.apiUrl).pipe(catchError(this.handleError)));
+    
+      //return this.http.post<Articulo>(this.apiUrl, art).pipe(catchError(this.handleError));   ESTE SIN AUTH FUNCIONA OK
+      const username = sessionStorage.getItem('username');
+      const password = sessionStorage.getItem('password');
+      
+      if (!username || !password) {
+        throw new Error('No authentication data found');
+      }
+      const headers = { 'Authorization': 'Basic ' + btoa(username + ":" + password)}
+      return this.http.put<Articulo>(this.apiUrl, art, {headers}).pipe(catchError(this.handleError));
+       
+       
+    
+      }
+
     deletetArticulosHTTP(art:Articulo): Observable<Articulo> {
       //alert( this.http.get<Articulo[]>(this.apiUrl).pipe(catchError(this.handleError)));
     
