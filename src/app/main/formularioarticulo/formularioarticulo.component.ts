@@ -10,6 +10,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Articulo } from '../../../Modelo/Articulo';
 import { NgFor, NgIf } from '@angular/common';
 import { ChangeDetectorRef } from '@angular/core';
+import { OnInit } from '@angular/core';
+
 
 @Component({
   selector: 'app-formularioarticulo',
@@ -18,7 +20,7 @@ import { ChangeDetectorRef } from '@angular/core';
   templateUrl: './formularioarticulo.component.html',
   styleUrl: './formularioarticulo.component.css'
 })
-export class FormularioarticuloComponent {
+export class FormularioarticuloComponent  implements OnInit {
 
   
  // nombre=new FormControl("",Validators.required);
@@ -31,6 +33,8 @@ export class FormularioarticuloComponent {
  selectedValue: String;
  selectedValue2:String;
  username:String | null
+ devolucionarts: Array<Articulo>=[];
+ banderayaexiste=false;
 
  constructor( private userservice:UsuarioService, private artservice:ArticuloService, private compraservice: CompraService, private router: Router, private route: ActivatedRoute, private cdr: ChangeDetectorRef){
    this.user=new Usuario("juan", "falso","1");
@@ -40,6 +44,15 @@ export class FormularioarticuloComponent {
    this.username="";
    this.selectedValue2="remera";
    
+   
+
+ }
+
+ ngOnInit(): void {
+  //this.Articulos = this.ArtService.getArticulosfiltrados()
+   //this.Articulos= this.ArtService.getArticulosHTTP()
+   this.artservice.getArticulosHTTP().subscribe((art) => {console.log(art); this.devolucionarts=art; console.log( art.length)});
+   console.log( this.devolucionarts.length )
 
  }
 
@@ -69,32 +82,45 @@ get nombre () {
    'stock':new FormControl("",[Validators.required, Validators.pattern('^[0-9]+$')]),'precio':new FormControl("",[Validators.required, Validators.pattern('^[0-9]+$')]),
    'temporada':new FormControl("",Validators.required), 'tipo':new FormControl("",[Validators.required]) } )
 
+
+
    procesar () {
 
-     console.log(this.formulariodearticulo.value)
-   
-     this.art= new Articulo(this.formulariodearticulo.value.nombre!,Number(this.formulariodearticulo.value.precio!),Number(this.formulariodearticulo.value.stock!),this.formulariodearticulo.value.temporada!,this.formulariodearticulo.value.tipo!);
-     this.username = sessionStorage.getItem('username');
-     if (this.username!=null){
     
-     this.artservice.PostArticulosHTTP(this.art).subscribe((artquevino: Articulo) => {console.log(artquevino)})
-     alert("articulo agregado")
-     this.cdr.detectChanges();
-     this.cdr.markForCheck();
-     }
-     else {
-      alert("debe estar logueado para generar un articulo");
-     }
-     this.refrescarPagina();
-    
-       //console.log(this.art);
-       
-      // this.router.navigate(['/misdatos']);
-      
-     //alert(this.user)
-   // this.bandera=true;
+    this.devolucionarts.forEach(element => { 
+      if(this.formulariodearticulo.value.nombre!=null && this.formulariodearticulo.value.nombre==element.getNombre())
+      {
+       alert( element.getNombre() + " ya existe");
+       this.banderayaexiste=true;
+
      
+      }
+     
+    })
+
+    if(this.banderayaexiste==false)
+    {
+      console.log(this.formulariodearticulo.value)
+   
+      this.art= new Articulo(this.formulariodearticulo.value.nombre!,Number(this.formulariodearticulo.value.precio!),Number(this.formulariodearticulo.value.stock!),this.formulariodearticulo.value.temporada!,this.formulariodearticulo.value.tipo!);
+      this.username = sessionStorage.getItem('username');
+      if (this.username!=null){
+     
+      this.artservice.PostArticulosHTTP(this.art).subscribe((artquevino: Articulo) => {console.log(artquevino)})
+      alert("articulo agregado")
+      this.cdr.detectChanges();
+      this.cdr.markForCheck();
+      }
+      else {
+       alert("debe estar logueado para generar un articulo");
+      }
+      this.refrescarPagina();
+    }
+    this.banderayaexiste=false;
+      
    }
+
+
 
      // alert('el evento si funciona pero no se actualiza la vista')
   refrescarPagina() {

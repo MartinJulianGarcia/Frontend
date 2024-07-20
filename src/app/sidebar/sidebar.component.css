@@ -18,5 +18,10 @@
     font-weight: bold; /* O el estilo que desees para el texto resaltado */
     color: rgb(146, 52, 132); /* Ejemplo de color para el resaltado */
   }
+
+  .r.active{
+    color: rgb(16, 6, 6); /* Color del texto del enlace activo */
+    font-weight: bold; /* Hacer el enlace activo en negrita */
+  }
   
   

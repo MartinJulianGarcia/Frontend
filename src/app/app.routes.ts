@@ -15,7 +15,9 @@ import { LoginComponent } from './misdatos/login/login.component';
 
 export const routes: Routes = [
 
-    { path: '', component: HomeComponent},
+    { path: 'home', component: HomeComponent},
+    { path: 'home/:categoria', component: HomeComponent},
+    
     { path: 'miscompras', component: MiscomprasComponent},
     { path: 'misdatos', component: MisdatosComponent, children: [
       { path: "section-a", component: LoginComponent},
@@ -27,7 +29,7 @@ export const routes: Routes = [
     },
     { path: 'footer', component: FooterComponent},
    
-    { path: '**', redirectTo: ''}
+    { path: '**', redirectTo: 'home'}
   
 
 ];

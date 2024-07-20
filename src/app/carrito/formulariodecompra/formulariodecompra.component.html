@@ -23,7 +23,7 @@
             <input type="text" formControlName="tarjeta" class="form-control" placeholder="por favor ingrese su tarjeta"  >
             <div class="alert alert-danger mt-2" [hidden]="formulariodecompra.get('tarjeta')?.valid || formulariodecompra.get('tarjeta')?.pristine" >   <!-- [hidden]="nombre.valid || nombre.pristine" -->
               
-                La tarjeta es obligatorio, debe contener 12 caracteres
+                La tarjeta es obligatorio, debe contener 12 numeros
             </div>
         </div>
         

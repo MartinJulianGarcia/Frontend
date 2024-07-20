@@ -11,6 +11,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ChangeDetectorRef } from '@angular/core';
 import { FormularioEditComponent } from './formulario-edit/formulario-edit.component';
+import { ActivatedRoute } from '@angular/router';
 
 
 
@@ -41,10 +42,11 @@ export class MainComponent implements OnInit ,OnChanges{
   banderanoexiste=true;
 
   UsuarioAdmin=false;
+  categoria: string | null = null;
 
   
 
-  constructor( private ArtService:ArticuloService, private router: Router, private cdr: ChangeDetectorRef) { 
+  constructor( private ArtService:ArticuloService, private router: Router, private cdr: ChangeDetectorRef, private route: ActivatedRoute,) { 
     
     
     
@@ -59,6 +61,7 @@ export class MainComponent implements OnInit ,OnChanges{
    this.ArtService.articulos$.subscribe(articulos => {
     this.Articulos = articulos;
     
+    
   });
   
 
@@ -71,7 +74,7 @@ export class MainComponent implements OnInit ,OnChanges{
     console.log( this.devolucionarts.length )
 
     //alert(this.ArtService.getfiltro());
-    this.filtro=this.ArtService.getfiltro()
+    //this.filtro=this.ArtService.getfiltro()
 
     if (sessionStorage.getItem('Rango')=="Administrador")
     {
@@ -82,7 +85,20 @@ export class MainComponent implements OnInit ,OnChanges{
     }
    
     this.cdr.detectChanges();
-    
+
+    this.route.paramMap.subscribe(params => {
+      this.categoria = params.get('categoria');
+      this.recargarelementos();
+    });
+
+    if (this.categoria) {
+      this.filtro=this.categoria
+      }
+   else {
+       this.filtro="todos";
+      };
+    }
+  
     
 
    // this.devolucionarts=this.ArtService.actualizar(this.devolucionarts); incluso aunque llame al service no actualiza el front
@@ -90,7 +106,7 @@ export class MainComponent implements OnInit ,OnChanges{
     //this.Articulos=this.devolucionarts.filter(Articulo => Articulo.getTipo() == "remera");
    
    
-  }
+  
 
   ngOnChanges(changes: SimpleChanges): void {
     
@@ -102,6 +118,18 @@ export class MainComponent implements OnInit ,OnChanges{
   
     this.cdr.detectChanges();
     
+  }
+
+  recargarelementos(){
+
+    this.ArtService.getArticulosHTTP().subscribe((art) => {console.log(art); this.devolucionarts=art; console.log( art.length)});
+    console.log( this.devolucionarts.length )
+
+    //alert(this.ArtService.getfiltro());
+    this.filtro=this.ArtService.getfiltro()
+  
+    this.cdr.detectChanges();
+
   }
 
   actualizar(): void {
@@ -228,7 +256,7 @@ export class MainComponent implements OnInit ,OnChanges{
          }
          this.banderanoexiste=true;
  
-       //  this.refrescarPagina();
+       // this.refrescarPagina();
  
      }
 
